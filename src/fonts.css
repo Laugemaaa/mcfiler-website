@@ -1,0 +1,13 @@
+/* System fonts keep the site fast, private and independent of external services. */
+@font-face {
+  font-family: "MC Sans";
+  src: local("Inter"), local("Segoe UI");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "MC Mono";
+  src: local("Cascadia Code"), local("Consolas"), local("Courier New");
+  font-weight: 100 900;
+  font-display: swap;
+}
