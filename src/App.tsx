@@ -2,6 +2,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   type ReactNode,
@@ -25,6 +26,8 @@ import { Icon, type IconName } from "./components/Icon";
 import { ProductArt, CategoryIllustration } from "./components/ProductArt";
 import { HeroScene } from "./components/HeroScene";
 import { MotionEffects, tiltCard, resetCard } from "./components/MotionEffects";
+import { PageTransition } from "./components/PageTransition";
+import { NavIndicator } from "./components/NavIndicator";
 
 const DiscordContext = createContext<(product?: string) => void>(() => {});
 
@@ -87,6 +90,7 @@ function Brand() {
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
+  const navRef = useRef<HTMLElement>(null);
   const location = useLocation();
   const selectedCategory = new URLSearchParams(location.search).get("kategori");
   useEffect(
@@ -153,7 +157,8 @@ function Header() {
       </div>
       <div className="container header-inner">
         <Brand />
-        <nav className="desktop-nav" aria-label="Hovedmenu">
+        <nav ref={navRef} className="desktop-nav" aria-label="Hovedmenu">
+          <NavIndicator navRef={navRef} />
           {navigation}
         </nav>
         <div className="header-actions">
@@ -182,7 +187,15 @@ function Header() {
             tabIndex={-1}
             onClick={() => setMenuOpen(false)}
           />
-          <nav id="mobile-menu" className="mobile-nav" aria-label="Mobilmenu">
+          <nav
+            id="mobile-menu"
+            className="mobile-nav"
+            aria-label="Mobilmenu"
+            onClick={(event) => {
+              if (event.target instanceof Element && event.target.closest("a"))
+                setMenuOpen(false);
+            }}
+          >
             <span className="eyebrow">DIT NÆSTE SERVERPROJEKT</span>
             {navigation}
             <NavLink to="/support">Kontakt & support</NavLink>
@@ -204,7 +217,7 @@ function Footer() {
           <div className="footer-intro">
             <Brand />
             <p>
-              Danske byggeklodser til din næste Minecraft-verden.
+              Danske filer til din næste Prison-server.
               <br />
               Skabt til dig, der har mere at bygge.
             </p>
@@ -422,7 +435,7 @@ function Home() {
         <div className="hero-copy container">
           <div className="hero-kicker">
             <span />
-            DIN DANSKE MINECRAFT-BUTIK
+            DIN DANSKE PRISON-BUTIK
             <span />
           </div>
           <h1 className="hero-wordmark">
@@ -430,12 +443,12 @@ function Home() {
             <small>.DK</small>
           </h1>
           <h2 className="hero-tagline">
-            Små filer. <span>Store eventyr.</span>
+            Prison-filer. <span>Store muligheder.</span>
           </h2>
           <p>
-            Giv din server liv med Skripts, Plugins og komplette Setups.
-            <br className="desktop-break" /> Du har idéerne. Vi har dine næste
-            byggeklodser.
+            Skripts, Plugins og Setups med Prison i fokus.
+            <br className="desktop-break" /> Byg din næste Prison-server med
+            danske filer.
           </p>
           <div className="hero-actions">
             <Link className="button button-primary" to="/produkter">
@@ -587,7 +600,8 @@ function Home() {
           </h2>
           <p>
             En ny funktion. Et nyt fællesskab. En helt ny verden. MCFiler er en
-            dansk butik for dig, der vil gøre mere med din Minecraft-server.
+            dansk butik med Prison-filer i centrum — til dig, der vil gøre mere
+            med din Minecraft-server.
           </p>
           <Link className="text-link" to="/om-os">
             Lær MCFiler at kende
@@ -773,9 +787,9 @@ function About() {
           <span className="muted-heading">der bygger videre.</span>
         </h1>
         <p>
-          MCFiler er en dansk Minecraft-butik med fokus på
-          <br className="desktop-break" /> Skripts, Plugins og komplette
-          serveropsætninger.
+          MCFiler er en dansk Minecraft-butik med Prison i fokus.
+          <br className="desktop-break" /> Vi sælger Skripts, Plugins og
+          komplette serveropsætninger.
         </p>
       </div>
       <div className="about-layout">
@@ -787,9 +801,9 @@ function About() {
             fællesskab.
           </p>
           <p>
-            MCFiler samler digitale byggeklodser til Minecraft-servere, så du
-            kan finde et udgangspunkt og gøre det til dit eget. Fra en enkelt
-            Skript-fil til en samlet opsætning.
+            MCFiler samler digitale byggeklodser til Minecraft-servere med
+            særligt fokus på Prison. Fra en enkelt Skript-fil til en samlet
+            opsætning kan du finde et udgangspunkt og gøre det til dit eget.
           </p>
           <p>
             Her på siden kan du udforske produkterne. Den personlige dialog,
@@ -1021,17 +1035,19 @@ function DiscordDialog({
 function PageEffects() {
   const { pathname, search } = useLocation();
   const previousPath = useRef(pathname);
-  useEffect(() => {
+  useLayoutEffect(() => {
     const product = products.find(
       (item) => pathname === `/produkter/${item.slug}`,
     );
     const titles: Record<string, string> = {
-      "/": "Mere liv i din Minecraft-server",
+      "/": "Danske filer til din Prison-server",
       "/produkter": "Skripts, Plugins & Setups",
       "/om-os": "Om MCFiler",
       "/support": "Kontakt & support",
     };
     document.title = `${product?.name ?? titles[pathname] ?? "Siden blev ikke fundet"} — MCFiler.dk`;
+  }, [pathname]);
+  useEffect(() => {
     if (previousPath.current !== pathname) {
       window.scrollTo({ top: 0, behavior: "instant" });
       document.getElementById("main-content")?.focus({ preventScroll: true });
@@ -1064,16 +1080,18 @@ export default function App() {
       <PageEffects />
       <MotionEffects />
       <Header />
-      <main id="main-content" tabIndex={-1}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/produkter" element={<Products />} />
-          <Route path="/produkter/:slug" element={<ProductPage />} />
-          <Route path="/om-os" element={<About />} />
-          <Route path="/support" element={<Support />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
+      <PageTransition>
+        <main id="main-content" tabIndex={-1}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/produkter" element={<Products />} />
+            <Route path="/produkter/:slug" element={<ProductPage />} />
+            <Route path="/om-os" element={<About />} />
+            <Route path="/support" element={<Support />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+      </PageTransition>
       <Footer />
       {dialog && (
         <DiscordDialog

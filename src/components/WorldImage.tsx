@@ -2,8 +2,8 @@ export function WorldImage({ priority = false }: { priority?: boolean }) {
   return (
     <img
       className="world-image"
-      src="/images/storybook-world-1672.webp"
-      srcSet="/images/storybook-world-960.webp 960w, /images/storybook-world-1672.webp 1672w"
+      src="/images/prison-coding-room-1672.webp"
+      srcSet="/images/prison-coding-room-960.webp 960w, /images/prison-coding-room-1672.webp 1672w"
       sizes="(max-width: 700px) 1600px, 118vw"
       width="1672"
       height="941"

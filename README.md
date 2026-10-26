@@ -2,7 +2,7 @@
 
 Hjemmesiden til **MCFiler.dk**.
 
-Dansk Minecraft-butik bygget med React, TypeScript og Vite. Hjemmesiden er statisk og kan hostes på Cloudflare Pages. Bestilling og betaling foregår via Discord; der er ingen betalingsgateway, kurv eller automatisk levering.
+Dansk Minecraft-butik med Prison-filer i fokus, bygget med React, TypeScript og Vite. Hjemmesiden er statisk og kan hostes på Cloudflare Pages. Bestilling og betaling foregår via Discord; der er ingen betalingsgateway, kurv eller automatisk levering.
 
 ## Kom i gang
 
@@ -31,15 +31,17 @@ npm run preview
 - `/support`: Discord-kontakt og spørgsmål/svar.
 - Ukendte adresser viser en dansk fejlside med et link tilbage til produkterne.
 
-Siden har responsiv mobilmenu, tastaturbetjening, synlige fokusmarkeringer og en Discord-dialog, der kan lukkes med Escape. Det tegnede Minecraft-univers bruger syv originale illustrationer i optimeret WebP: landskab, to figurer, forgrund og tre kategorimotiver. Skrifttyperne Bungee og Nunito Sans hostes lokalt, så siden ikke afhænger af eksterne billed- eller skrifttjenester.
+Siden har responsiv mobilmenu, tastaturbetjening, synlige fokusmarkeringer og en Discord-dialog, der kan lukkes med Escape. Det tegnede Prison-univers bruger syv originale illustrationer i optimeret WebP: koderværelse, betjent, fange, indendørs forgrund og tre kategorimotiver. Skrifttyperne Bungee og Nunito Sans hostes lokalt, så siden ikke afhænger af eksterne billed- eller skrifttjenester.
 
 ## Visuel identitet
 
-Designet har tegnede konturer, cel-shading, mørk lilla/marineblå og gyldne/orange knapper. To originale figurer indrammer heroens logo og indhold, mens landskab og illustreret vegetation ligger i separate lag. Samme tegnede formsprog går igen på produktoversigten, produktsiderne, om-siden og support.
+Designet har tegnede konturer, cel-shading, mørk lilla/marineblå og gyldne/orange knapper. En betjent til venstre og en fange til højre indrammer logo og indhold. Baggrunden er et koderværelse med en person ved computeren, og forgrunden viser gulv, bøger og kabler i et separat lag. Samme tegnede formsprog går igen på produktoversigten, produktsiderne, om-siden og support.
 
 Effekterne omfatter muse- og scroll-parallax, svævende figurer, glødende partikler, klikgnister, scroll-animationer, en scroll-indikator og produktkort med 3D-vip og lysrefleks. Heroens pauseknap stopper baggrundsbevægelsen. Reduceret bevægelse respekteres automatisk; partikelloopet stopper uden for viewport og i en skjult fane.
 
 Navigationen indeholder Forside, Produkter, Skripts, Plugins, Setups, Om os og Discord. Produktkort viser navn, beskrivelse, pris, Minecraft-versioner og links til produktside og Discord. Alle eksempelmarkeringer er bevaret.
+
+Sideskift har en kort fade/slide-overgang via Reacts ViewTransition, og topmenuens gyldne markering glider til det aktive link. På mobil lukker menuen, så overgangen kan ses. Browsere uden View Transitions får en lettere indgangsanimation. Reduceret bevægelse slår overgangene fra.
 
 Se [grafik- og designdokumentationen](docs/visual-assets.md) for referenceanalyse, farver, billedfiler, opløsninger, præcise billedprompter og skrifttypelicenser. Alle nødvendige illustrationer er leveret i `public/images/`.
 
@@ -121,6 +123,8 @@ src/
   components/
     HeroScene.tsx          Lag, figurer, parallax, partikler og pause
     MotionEffects.tsx      Scroll-animationer, fremgang og 3D-kort
+    NavIndicator.tsx       Glidende markering af aktivt menupunkt
+    PageTransition.tsx     Sideskift, fallback og reduceret bevægelse
     Icon.tsx               Fælles SVG-ikoner
     ProductArt.tsx         Produktillustrationer
     WorldImage.tsx         Responsiv landskabsillustration

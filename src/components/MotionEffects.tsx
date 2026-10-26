@@ -87,7 +87,12 @@ export function MotionEffects() {
         observed.add(element);
         if (preference.matches) return;
         element.classList.add("scroll-reveal");
-        intersection.observe(element);
+        const bounds = element.getBoundingClientRect();
+        if (bounds.top < window.innerHeight && bounds.bottom > 0) {
+          element.classList.add("is-revealed");
+        } else {
+          intersection.observe(element);
+        }
       });
     }
     function updatePreference() {

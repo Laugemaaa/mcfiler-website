@@ -13,6 +13,11 @@ type Particle = {
   mint: boolean;
 };
 
+const characterArt = {
+  left: "prison-officer",
+  right: "prison-inmate",
+} as const;
+
 export function HeroScene() {
   const sceneRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -229,8 +234,8 @@ export function HeroScene() {
           >
             <img
               className="hero-character-image"
-              src={`/images/adventurer-${side}-768.webp`}
-              srcSet={`/images/adventurer-${side}-384.webp 384w, /images/adventurer-${side}-768.webp 768w`}
+              src={`/images/${characterArt[side]}-768.webp`}
+              srcSet={`/images/${characterArt[side]}-384.webp 384w, /images/${characterArt[side]}-768.webp 768w`}
               sizes="(max-width: 700px) 52vw, (max-width: 1600px) 28vw, 480px"
               width="768"
               height="1152"
@@ -243,8 +248,8 @@ export function HeroScene() {
         <canvas className="scene-particles" ref={canvasRef} />
         <div className="hero-foreground" data-parallax=".2">
           <img
-            src="/images/forest-foreground-1672.webp"
-            srcSet="/images/forest-foreground-960.webp 960w, /images/forest-foreground-1672.webp 1672w"
+            src="/images/coding-room-foreground-1672.webp"
+            srcSet="/images/coding-room-foreground-960.webp 960w, /images/coding-room-foreground-1672.webp 1672w"
             sizes="100vw"
             width="1672"
             height="941"

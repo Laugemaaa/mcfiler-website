@@ -1,90 +1,84 @@
-# Tegnet Minecraft-univers og effekter
+# Prison-tema, illustrationer og sideskift
 
-Aktuel visuel retning for MCFiler.dk, 26. oktober 2026, efter brugerens Mineplex-skærmbillede. [Mineplex](https://mineplex.com/) og det vedhæftede skærmbillede er brugt som stilreference. Alle figurer, landskaber og produktmotiver er nygenereret med den indbyggede ImageGen-funktion.
+Aktuel visuel identitet for MCFiler.dk, opdateret 26. oktober 2026. Butikken sælger primært Minecraft Prison-filer. Udtrykket bruger tegnede konturer, cel-shading, mørk lilla/marineblå og varm gul/orange. Det bygger videre på den tidligere godkendte grafikstil.
 
-## Grafisk formsprog
+## Komposition og indhold
 
-Referencen viser tegnet, todimensionel spilgrafik: mørke markante konturer, store malede farveflader, cel-shading, kantede Minecraft-inspirerede former og udtryksfulde figurer. Det centrale logo og indhold indrammes af figurer på siderne samt vegetation i forgrunden. Mørk lilla og marineblå giver plads til orange/gule fokuspunkter. Store overskrifter og knapper har synlig dybde.
+Heroens baggrund er et originalt koderværelse med stenvægge, serverudstyr, skrivebord, skærme og en person, der sidder og koder. Den øvre midte giver plads til logo og indhold, mens koderen er synlig nedenunder. Til venstre står en betjent med blå uniform, nøgler og clipboard; til højre en fange i orange dragt med en Minecraft-inspireret hakke. Figurerne er redigeret fra MCFilers egne illustrationer med bevaret ansigt og positur. Forgrunden viser gulv, bøger, kabler og nøgler i et separat transparent lag.
 
-MCFiler bruger nu dette tegnede formsprog i en original verden: et månebelyst landskab, svævende øer, et lanternebelyst træ og en lille stenbro. En runekyndig med grøn kappe og en bygmester med arbejdsforklæde indrammer heroen. De tre kategorier har tegnet bog, ametystkube og serverø. Landskab, figurer og forgrund er separate lag. Logoet er MCFilers typografiske udformning med guldfarve, let hældning og mørk ekstrudering.
-
-Referencebilledet blev givet til ImageGen som **stilreference**. Mineplex-logo, eksisterende figurer og billedfiler bruges ikke på hjemmesiden. De tidligere 3D-prægede illustrationer er erstattet. PNG-originalerne opbevares lokalt i den Git-ignorerede mappe `.qa/art-originals/`.
-
-## Palet og skrifter
-
-| Rolle         | Farve                       |
-| ------------- | --------------------------- |
-| Baggrund      | `#1c2546`                   |
-| Navigation    | `#211b30`                   |
-| Indholdsflade | `#252e50`                   |
-| Primær accent | gul/orange, cirka `#ffb622` |
-| Skripts       | grøn/mint                   |
-| Plugins       | ametyst/lilla               |
-| Setups        | rav/guld                    |
-
-Bungee bruges til logo, korte overskrifter og priser; Nunito Sans til almindelig tekst. Begge hostes lokalt via Fontsource. SIL Open Font License 1.1 findes i `public/fonts/OFL-Bungee.txt` og `public/fonts/OFL-NunitoSans.txt`.
+Forside, virksomhedsbeskrivelse, metadata og sidetitel fremhæver nu Prison. Eksempelprodukterne er stadig tydeligt markeret som eksempler; der er ikke tilføjet udokumenterede produktfunktioner eller salgstal. Bestilling og kontakt foregår fortsat på Discord.
 
 ## Færdige billedaktiver
 
-Alle WebP-filer ligger i `public/images/`. Ingen nødvendige illustrationer mangler.
+Alle aktiver ligger i `public/images/`. De fire Prison-motiver er lavet med den indbyggede ImageGen-funktion. De tre kategorimotiver er bevaret fra den foregående version. PNG-originaler ligger lokalt i `.qa/art-originals/` og er ikke i Git. Ingen illustrationer mangler.
 
-| Motiv      | Filer                                                       | Kildeformat        |
-| ---------- | ----------------------------------------------------------- | ------------------ |
-| Landskab   | `storybook-world-1672.webp`, `storybook-world-960.webp`     | 1672 × 941         |
-| Runekyndig | `adventurer-left-768.webp`, `adventurer-left-384.webp`      | 1024 × 1536, alpha |
-| Bygmester  | `adventurer-right-768.webp`, `adventurer-right-384.webp`    | 1024 × 1536, alpha |
-| Forgrund   | `forest-foreground-1672.webp`, `forest-foreground-960.webp` | 1672 × 941, alpha  |
-| Skripts    | `drawn-script-960.webp`, `drawn-script-480.webp`            | 1254 × 1254        |
-| Plugins    | `drawn-plugin-960.webp`, `drawn-plugin-480.webp`            | 1254 × 1254        |
-| Setups     | `drawn-setup-960.webp`, `drawn-setup-480.webp`              | 1254 × 1254        |
+| Motiv               | WebP-filer                                                            | Original           |
+| ------------------- | --------------------------------------------------------------------- | ------------------ |
+| Koderværelse        | `prison-coding-room-1672.webp`, `prison-coding-room-960.webp`         | 1672 × 941         |
+| Betjent til venstre | `prison-officer-768.webp`, `prison-officer-384.webp`                  | 1024 × 1536, alpha |
+| Fange til højre     | `prison-inmate-768.webp`, `prison-inmate-384.webp`                    | 1024 × 1536, alpha |
+| Gulv/forgrund       | `coding-room-foreground-1672.webp`, `coding-room-foreground-960.webp` | 1672 × 941, alpha  |
+| Skripts             | `drawn-script-960.webp`, `drawn-script-480.webp`                      | 1254 × 1254        |
+| Plugins             | `drawn-plugin-960.webp`, `drawn-plugin-480.webp`                      | 1254 × 1254        |
+| Setups              | `drawn-setup-960.webp`, `drawn-setup-480.webp`                        | 1254 × 1254        |
 
-Der er ikke kunstigt opskaleret. Sharp bruges til skalering og WebP-eksport; billedindholdet er fremstillet med ImageGen. Alpha er kontrolleret på figurer og forgrund og bevaret ved eksport. Landskabets store fil er cirka 222 KiB. Mobilfigurerne er cirka 59–60 KiB hver. Den store baggrund vælges også på smalle skærme, hvor højden og beskæringen kræver flere kildepixels. Øvrige billeder bruger responsive `srcset` og indlæses efter behov.
+Sharp bruges til skalering og WebP-eksport, uden kunstig opskalering. Alpha er kontrolleret og bevaret på figurer og forgrund. Stor baggrund er cirka 179 KiB; de små figurer er cirka 49 og 55 KiB. Heroen har prioriteret indlæsning, responsive billedstørrelser og større baggrund på høje mobilvisninger.
 
-## Implementerede effekter
+Bungee og Nunito Sans hostes lokalt via Fontsource. SIL Open Font License ligger i `public/fonts/OFL-Bungee.txt` og `public/fonts/OFL-NunitoSans.txt`.
 
-- Muse- og scroll-parallax med forskellig dybde for landskab, figurer og forgrund. Musebevægelser dæmpes.
-- Let svæven af figurer samt en bevægelig scroll-pil.
-- Gyldne/mintfarvede glødende canvas-partikler og korte gnister ved klik på heroens handlingsknapper.
-- Produktkort vipper med en præcis mus og har en lysrefleks, der følger markøren. Touch får ikke fastlåst hover.
-- Sektioner, kategorier og kort kommer ind med korte scroll-animationer. Nyt indhold fra filtre registreres også.
-- Knapper har dybde, trykreaktion og en lysstribe ved hover.
-- En tynd gylden linje viser scroll-fremgang.
-- **Pause effekter** stopper baggrundens løbende bevægelse og partikler. **Afspil effekter** genoptager dem.
-- `prefers-reduced-motion` slår automatisk bevægelse, kortvip, partikler og indgangsanimationer fra og viser alt indhold straks.
-- Partiklernes loop stopper, når heroen er uden for viewport, og når fanen er skjult. Figursvæv sættes på pause uden for viewport. Canvas har et partikelloft, begrænset pixeltæthed og cirka 30 tegninger pr. sekund. Lag flyttes med transform.
+## Sideskift og navigation
 
-`HeroScene.tsx` styrer hero og pause. `MotionEffects.tsx` styrer scroll-reveal, scroll-fremgang og kortvip. `effects.css` indeholder den tegnede stil og animationer. Ingen ekstra animationsbiblioteker er installeret.
+`PageTransition.tsx` bruger React 19.3's indbyggede ViewTransition rundt om hovedindholdet. Navigation via topmenuen og kategorier får en kort fade/slide-overgang. Headeren ligger uden for indholdsgrænsen. Det følger [Reacts ViewTransition-vejledning](https://react.dev/reference/react/ViewTransition) og [React Routers vejledning](https://reactrouter.com/how-to/view-transitions).
+
+`NavIndicator.tsx` måler det aktive link og flytter den gyldne menumarkering med en kort overgang. Den tilpasses også ved ændrede skriftmål og skærmbredder. Mobilmenuen lukker ved valg af et link, så indholdets sideskift kan ses. Browserhistorik og almindelige links bevares.
+
+Browsere uden View Transitions API får en lettere indgangsanimation via Web Animations API. Reduceret bevægelse slår både native overgang, fallback og menumarkeringens bevægelse fra. Sidetitel opdateres samtidig med indholdet. Indhold, der allerede er synligt, skjules ikke bagefter af scroll-reveal.
+
+## Øvrige effekter
+
+- Muse- og scroll-parallax med separat bevægelse af rum, figurer og forgrund.
+- Let figursvæv, glødende partikler, klikgnister og bevægelig scroll-pil.
+- Produktkort med musestyret 3D-vip og lysrefleks.
+- Scroll-reveal, scroll-indikator og lysstribe på knapper.
+- Pause/genoptagelse af heroens baggrundseffekter.
+- Partikelløbet stopper uden for viewport og i skjult fane; reduceret bevægelse understøttes.
+
+Ingen nye afhængigheder eller animationsbiblioteker er installeret.
 
 ## Validering
 
-Produktionsbuildet består. Alle otte sidetyper er kontrolleret ved 320, 375, 390, 768, 1024, 1440 og 1920 px. Kategorier, produktsider, direkte links, historik, mobilmenu, FAQ, Discord-dialog og tastaturfokus er testet. Målrettede browsertests har bekræftet faktisk canvas-tegning, muse- og scroll-parallax, pause/genoptagelse, stop uden for viewport, scroll-reveal, kortvip og nulstilling samt reduceret bevægelse.
+Produktionsbuild og formatering består. Alle otte sidetyper er kontrolleret ved 320, 375, 390, 768, 1024, 1440 og 1920 px. Navigation, produktsider, filtre, direkte links, historik, mobilmenu, FAQ og Discord-dialog består uden browserfejl eller vandret overløb.
+
+Målrettede browsertests har bekræftet faktiske native fade/slide-animationer, kategori-skift, aktiv menumarkering både ved første indlæsning og efter navigation, mobilmenu, reduceret bevægelse og fallback uden View Transitions. De eksisterende parallax-, partikel-, pause- og 3D-korteffekter er også kontrolleret.
 
 ## Præcise ImageGen-prompter
 
-Alle aktiver bruger det indbyggede ImageGen-værktøj, uden CLI/API-fallback. Brugerens skærmbillede var billedinput som stilreference. `transparent_background` var slået til for begge figurer og forgrunden og fra for de øvrige motiver.
+Der er brugt indbygget ImageGen, uden CLI/API-fallback. For betjent og fange er billedinput 1 MCFilers egen tidligere figur, og billedinput 2 brugerens skærmbillede af hjemmesiden som stilkontekst. For rum og forgrund er skærmbilledet kun stilreference. For kategoriillustrationerne blev det tidligere Mineplex-skærmbillede brugt som stilreference. Billedfiler fra Mineplex bruges ikke i hjemmesiden.
 
-### storybook-world
+`transparent_background` er slået til for betjent, fange og forgrund og fra for øvrige motiver.
+
+### prison-coding-room
 
 ```text
-Use case: stylized-concept. Asset: panoramic 16:9 BACKGROUND ONLY for the Danish Minecraft marketplace MCFiler.dk. Image 1 is a STYLE REFERENCE ONLY: match its hand-drawn 2D game-website illustration language, broad painterly color fills, visible dark ink outlines, angular block-inspired forms and friendly fantasy cartoon atmosphere. Create a completely NEW original scene, not an edit or recreation of the reference. An enchanted Minecraft-inspired woodland valley at twilight: angular grassy cliffs, blocky distant mountains, layered rolling blue-purple hills and clouds, a little winding stone path and stone bridge in the middle distance, a magical ancient oak with hanging golden lanterns on the far right, small timber huts glowing warmly on the far left, a few floating enchanted stone fragments. A pale golden moon in the upper-left side partly behind clouds. Center upper 60% should be quiet open dark plum twilight sky and broad low-contrast distant landscape for website logo and readable text; detailed scenery frames the outer sides and lower third. Dark inked outlines, soft cel-shading, two-dimensional hand-painted concept illustration with simplified broad shapes, lush warm amber highlights, deep purple shadows, midnight blue and muted teal, rich navy foreground. Genuinely drawn artwork with confident linework and graphic shapes. NOT a 3D render, NOT realistic, NOT densely textured voxels, NOT photorealistic. No characters, no text, no letters, no Mineplex logo, no crown, no existing brand characters, no interface, no cards, no watermark. This is an original environment artwork only.
+Use case: illustration-story. Asset: wide panoramic 16:9 illustrated website hero BACKGROUND for MCFiler.dk, a Danish Minecraft Prison-file store. Image 1 is a STYLE REFERENCE ONLY for the current website's bold dark-navy outlines, cel-shaded hand-painted 2D Minecraft-inspired cartoon artwork and violet/golden palette. Create a NEW interior environment. A cozy block-inspired prison-server developer's coding room at night: slate-blue stone walls, chunky timber beams, a small barred window with moonlight at the far left, shelves with books and a few keys, an amber wall lamp and subtle server cabinets along the room edges. IMPORTANT COMPOSITION: the upper central 55% is a quiet dark indigo/plum wall with soft broad shadow and no busy objects, deliberately open for website logo and text. In the LOWER CENTER of the image, clearly visible below the future text, an original adult programmer is seated at a wooden desk in a gaming chair, in a readable three-quarter SIDE PROFILE, wearing a dark teal hoodie, actively typing on a keyboard. Two angled computer monitors show luminous mint/turquoise abstract code lines without readable words; a warm desk lamp, a notebook and a mug. Make the coder, chair, desk and glowing screens recognizably visible as the focal environmental story, mainly in the lower half around 55-80% image height. Rich illustrated depth, wide room perspective, floorboards or stone tiles in the bottom strip, furniture pushed toward outer edges leaving central logo area quiet. Bold confident ink outlines, broad clean painterly cel-shaded forms, expressive drawn shapes, professionally art-directed 2D game promo illustration consistent with the reference. Colors midnight navy, violet shadows, golden amber lighting and mint screen light. No large foreground characters: those will be separate layers. No plants or forest landscape in the room. No logos, no text, no watermark, no interface. NOT photorealistic, NOT 3D rendered, not densely voxel-textured.
 ```
 
-### adventurer-left
+### prison-officer
 
 ```text
-Use case: illustration-story. Asset: SINGLE ORIGINAL CHARACTER CUTOUT on true transparent background, for the LEFT edge of a Minecraft-inspired fantasy website. Image 1 is solely a reference for the visual language: bold hand-drawn dark navy outlines, expressive block-inspired human anatomy, flat painterly cel shading, playful action pose. Do not reproduce either reference character. Our original character: an enthusiastic young adult Danish Minecraft-style rune scholar with short wavy DARK TEAL hair, warm tan skin, round green eyes, a forest-green hooded cloak over a cream tunic, dark plum trousers and sturdy brown leather boots. A golden belt with tiny paper scrolls. They hold an open glowing mint spellbook in one hand, the other hand gestures towards the RIGHT, into the center of the webpage. Dynamic three-quarter stance stepping toward the viewer, friendly confident joyful expression. Entire full body and all hands, boots, cloak and book visible, generous transparent margin around the entire character. The face and hands use original stylized angular blocky shapes, illustrated rather than exact game models. Strong readable silhouette, warm golden rim lighting, graphic soft shading, beautiful hand-inked commercial game promotional artwork. Portrait composition about 2:3. No lettering, no logo, no background, no ground plane, no UI, no watermark, no crown. Do not copy hair, face, outfit, colors or pose from either Mineplex character. NOT 3D, NOT photographic, NOT realistic block render. Transparent alpha background.
+Use case: precise-object-edit. Image 1 is the EDIT TARGET: the original left-side MCFiler character. Image 2 is only webpage style/context reference. Transform this same friendly original character into a Minecraft PRISON OFFICER. Preserve their short dark teal hair, tan skin, green eyes, joyful face, original illustration quality, full-body three-quarter stance and open hand gesturing toward the RIGHT into the webpage center. Replace the green cloak, cream fantasy tunic and plum trousers with a crisp dark navy prison-officer uniform: matching navy shirt and trousers, light-blue shoulder panels, simple gold shield-shaped badge with no insignia or lettering, utility belt with a visible ring of keys and a small radio, practical black boots, and a simple dark-blue officer cap with a gold band. Replace the spellbook in their left hand with a brown clipboard and cream paper; no readable writing. Remove all magic, runes, scroll tubes and cloak. Keep energetic welcoming body language and a strong friendly game-character silhouette. Retain bold dark navy ink contours, hand-drawn 2D cel-shading, clean broad painted forms, warm amber rim light and violet shadows. Keep entire body, all hands, clipboard, cap and boots visible with transparent margins, portrait 2:3. TRUE TRANSPARENT ALPHA background; preserve transparency, do not add a scenery or colored rectangle. No weapons, no logos, no real police insignia, no watermark, no text. This is a playful original Minecraft Prison game character, not a photoreal person or 3D model.
 ```
 
-### adventurer-right
+### prison-inmate
 
 ```text
-Use case: illustration-story. Asset: SINGLE ORIGINAL CHARACTER CUTOUT on true transparent background, for the RIGHT edge of a Minecraft-inspired fantasy website. Image 1 is a visual style reference ONLY: match the confident hand-drawn dark navy contours, expressive angular block-inspired human anatomy, warm painterly cel shading and fun action energy. Do not copy either character. Our original character: a joyful young adult Minecraft-inspired master builder with deep brown skin, short dark auburn hair, bright amber eyes, brass goggles pushed up on the forehead. Wears a mustard-yellow work jacket, a dark blue carpenter apron with leather straps and utility pockets, charcoal trousers, rugged boots. Holds a chunky original enchanted pickaxe with a turquoise crystal head and brown handle angled upward on their outer RIGHT side, while extending their left open hand towards the LEFT, into the center of the webpage, welcoming the visitor. Dynamic three-quarter full-body pose with one foot forward, huge confident smile, lively but natural anatomy. Strong readable silhouette, all feet, hands, hair, tool fully within frame with generous transparent margins. Original drawn Minecraft-ish angular character, premium game-website promo illustration, crisp dark ink outlines and broad flat shaded planes, golden rim light and subtle lilac shadow tones. Portrait composition about 2:3. True transparent alpha background. No backdrop, no ground plane, no logos, no letters, no interface, no watermark, no crown. NOT a 3D render, NOT photorealistic, no copying Mineplex faces, outfits or characters.
+Use case: precise-object-edit. Image 1 is the EDIT TARGET: the original right-side MCFiler character. Image 2 is only webpage style/context reference. Transform this same friendly original character into a Minecraft PRISON INMATE character for a prison-mining server. Preserve their warm brown skin, short dark auburn hair, amber eyes, big confident smile, full-body original three-quarter pose, hand gesturing toward the LEFT into the webpage center, and the original turquoise crystal mining pickaxe in the outer right hand. Replace the yellow work jacket, navy apron and utility straps with a clearly recognizable bright ORANGE prison jumpsuit, simple pale rectangular ID patch with NO readable text, dark ankle cuffs and sturdy dark gray work boots. Remove the forehead goggles, tool belt, rolled scrolls and apron so the orange prison uniform is unmistakable. Keep playful energetic gamer body language, all hands and feet and entire pickaxe fully visible inside portrait 2:3 frame with transparent margins. Same bold dark navy linework, sharp expressive angular Minecraft-inspired cartoon shapes, clean broad painterly 2D cel-shading, amber rim light and soft violet shadows as the original. TRUE TRANSPARENT ALPHA background, preserve transparency. No scenery, no colored rectangle, no chains or restraints, no branding, no watermark, no lettering. Original approachable Minecraft Prison game illustration, NOT photographic or a 3D render.
 ```
 
-### forest-foreground
+### coding-room-foreground
 
 ```text
-Use case: illustration-story. Asset: wide panoramic 16:9 original decorative FOREGROUND OVERLAY for a hand-drawn Minecraft-inspired fantasy website. Image 1 is a STYLE REFERENCE ONLY, especially its dark inked foliage foreground, not a source to trace. Create an original border of thick dark midnight-navy (#1c2647) hand-drawn fantasy woodland vegetation rising from the BOTTOM EDGE: expressive broad fern leaves, angular grass tufts, small crooked shrubs, a few mossy blocklike rocks, and larger irregular leaves at the lower left and lower right corners. About 65-75% of the entire upper canvas MUST be empty TRUE TRANSPARENCY; vegetation occupies the lower strip and slightly higher side corners. Bottommost edge must be a continuous solid dark midnight-navy silhouette so it blends seamlessly into the page background. Broad clean cartoon shapes, subtle two-tone blue-purple shading, confident thick dark outlines, hand-painted 2D style, not dense detail. No text, no logo, no characters, no moon, no entire landscape, no interface, no watermark. NOT photorealistic, NOT 3D, no existing Mineplex assets. Real transparent alpha background around and above the plants.
+Use case: illustration-story. Asset: original wide 16:9 TRUE TRANSPARENT foreground overlay for a hand-drawn Minecraft-style CODING ROOM website hero. Image 1 is a STYLE REFERENCE ONLY for bold dark navy contours and painted cel-shading. Replace outdoor vegetation with a sparse indoor floor border: a continuous very dark midnight-navy (#1c2546) stone-tile floor strip at the very bottom, a small wooden crate and a couple of blocky books at the lower left corner, a coiled computer cable, a small brass keyring near the lower right corner and a few loose sheets of paper. All objects stay in the BOTTOM 15-20% with slightly higher corner stacks, leave the entire upper 75-80% as empty real alpha transparency. Keep the central bottom edge especially low and unobtrusive so a background desk and seated programmer remain visible. Broad confident dark outlines, angular drawn forms, minimal two-tone indigo shading and subtle amber highlights, harmonious with a violet nighttime room. No plants, no grass, no landscape, no characters, no walls, no text, no letters, no logo, no watermark, no UI. Bottommost edge blends into solid dark midnight navy; everything above the floor and props has genuine transparent alpha.
 ```
 
 ### drawn-script

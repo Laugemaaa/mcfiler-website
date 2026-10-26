@@ -1,4 +1,4 @@
-/* Den tegnede natteverden og dens bevægelseslag. */
+/* Det tegnede Prison-univers og dets bevægelseslag. */
 .site-header {
   background: #211b30;
   border-bottom: 4px solid #e99618;
@@ -483,7 +483,7 @@
 .page-content:before {
   background-image:
     linear-gradient(90deg, #1c2546ee, #1c254699),
-    url("/images/storybook-world-1672.webp");
+    url("/images/prison-coding-room-1672.webp");
 }
 .specification {
   background: #242c48;
@@ -973,5 +973,88 @@
   .motion-toggle,
   .scroll-progress {
     display: none;
+  }
+}
+
+/* Den aktive menuknap følger sideskiftet uden at flytte navigationens tekst. */
+.desktop-nav {
+  position: relative;
+  isolation: isolate;
+}
+.desktop-nav > a {
+  z-index: 1;
+}
+.desktop-nav > a.active {
+  background: transparent;
+  box-shadow: none;
+}
+.nav-active-indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  border-radius: 9px;
+  background: linear-gradient(#ffbe2d, #f59a09);
+  box-shadow:
+    0 4px 0 #b96e0c,
+    inset 0 1px 0 #ffdf8e;
+  transition:
+    transform 0.34s cubic-bezier(0.2, 0.75, 0.25, 1),
+    width 0.34s cubic-bezier(0.2, 0.75, 0.25, 1),
+    height 0.25s,
+    opacity 0.15s;
+}
+
+/* Reacts ViewTransition holder headeren uden for indholdets fade/slide. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-group(.page-swap) {
+  animation-duration: 0.36s;
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+::view-transition-image-pair(.page-swap) {
+  isolation: isolate;
+}
+::view-transition-old(.page-swap) {
+  animation: page-leave 0.18s ease-out both;
+  mix-blend-mode: normal;
+}
+::view-transition-new(.page-swap) {
+  animation: page-arrive 0.36s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  mix-blend-mode: normal;
+}
+@keyframes page-leave {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+}
+@keyframes page-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-active-indicator {
+    transition: none;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }
