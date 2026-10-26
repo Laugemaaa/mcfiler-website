@@ -3,15 +3,15 @@
 :root {
   font-family: "Nunito Sans Variable", "Segoe UI", sans-serif;
   color: #f2f4eb;
-  background: #0c2429;
+  background: #1c2546;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --bg: #0c2429;
-  --panel: #142f35;
-  --line: #2a474a;
-  --muted: #b1c4c3;
+  --bg: #1c2546;
+  --panel: #252e50;
+  --line: #3c4363;
+  --muted: #c0c4d8;
   --green: #a2e6b0;
   --gold: #f4bd60;
   --max: 1200px;
@@ -143,7 +143,7 @@ main:focus {
 .button-secondary,
 .button-discord,
 .button-light {
-  background: #204a50;
+  background: #303754;
   color: #edf5f0;
   border-color: #4d797b #345d62 #345d62;
   box-shadow:
@@ -177,13 +177,13 @@ main:focus {
 
 /* Navigation */
 .site-header {
-  background: #0e292f;
+  background: #211a30;
   position: relative;
   z-index: 20;
   border-bottom: 1px solid #52735966;
 }
 .utility-bar {
-  background: #081d22;
+  background: #151222;
   color: #94aaa8;
   font-size: 9px;
   font-weight: 800;
@@ -314,7 +314,7 @@ main:focus {
   text-align: center;
   isolation: isolate;
   overflow: hidden;
-  background: #123e4a;
+  background: #221d39;
 }
 .hero-landscape {
   position: absolute;
@@ -337,8 +337,8 @@ main:focus {
     #061f3259 0%,
     #08262d22 35%,
     #08272b00 62%,
-    #0c2429dd 94%,
-    #0c2429 100%
+    #1c2546dd 94%,
+    #1c2546 100%
   );
 }
 .hero-copy {
@@ -481,11 +481,11 @@ main:focus {
   border: 1px solid #426257;
   border-bottom: 3px solid var(--accent);
   border-radius: 7px;
-  background: #133137;
+  background: #252d4c;
   overflow: hidden;
   isolation: isolate;
   box-shadow:
-    0 7px 0 #071c20,
+    0 7px 0 #11172e,
     0 10px 30px #00151b44;
   transition:
     transform 0.2s,
@@ -506,9 +506,9 @@ main:focus {
   z-index: -1;
   background: linear-gradient(
     90deg,
-    #112d34 15%,
-    #112d34ed 42%,
-    #112d3400 100%
+    #23243e 15%,
+    #23243eed 42%,
+    #23243e00 100%
   );
 }
 .category-copy {
@@ -624,7 +624,7 @@ main:focus {
   background: #244b40;
   color: #d7f6c6;
   border-color: #58745a;
-  box-shadow: 0 2px 0 #061c20;
+  box-shadow: 0 2px 0 #11162c;
 }
 .filter.active > span {
   color: #bad999;
@@ -665,11 +665,11 @@ main:focus {
   position: relative;
   display: flex;
   flex-direction: column;
-  background: #163037;
+  background: #252e4d;
   border: 1px solid #36554f;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 5px 0 #071c21;
+  box-shadow: 0 5px 0 #11172d;
   transition:
     transform 0.2s,
     border-color 0.2s;
@@ -699,13 +699,13 @@ main:focus {
   position: relative;
   aspect-ratio: 1.35;
   overflow: hidden;
-  background: #0f292e;
+  background: #1f2644;
 }
 .product-art:after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(transparent 70%, #153036dd);
+  background: linear-gradient(transparent 70%, #252e4ddd);
 }
 .product-art > img {
   display: block;
@@ -744,7 +744,7 @@ main:focus {
   transition: background 0.2s;
 }
 .art-open:hover {
-  background: #294c4d;
+  background: #3b3d5a;
 }
 .product-card-content {
   display: flex;
@@ -880,7 +880,7 @@ main:focus {
   align-items: flex-start;
   padding: 16px 19px;
   border: 1px solid #38514a;
-  background: #122c2e;
+  background: #242d4a;
   border-radius: 5px;
   margin-top: 26px;
   margin-bottom: 24px;
@@ -904,7 +904,7 @@ main:focus {
 
 /* Fra idé til fællesskab */
 .how-section {
-  background: #102e32;
+  background: #212b4b;
   border-block: 1px solid #2d4b47;
   padding-block: 59px;
 }
@@ -1021,8 +1021,8 @@ main:focus {
   min-height: 346px;
   border: 1px solid #607151;
   border-radius: 9px;
-  box-shadow: 0 7px 0 #061c20;
-  background: #163738;
+  box-shadow: 0 7px 0 #11162c;
+  background: #293050;
   overflow: hidden;
   isolation: isolate;
 }
@@ -1094,8 +1094,8 @@ main:focus {
   z-index: -1;
   pointer-events: none;
   background:
-    linear-gradient(90deg, #0c2429ee, #0c242999),
-    url("/images/hero-world-1672.webp") center 55% / cover;
+    linear-gradient(90deg, #1c2546ee, #1c254699),
+    url("/images/storybook-world-1672.webp") center 55% / cover;
   mask-image: linear-gradient(#000, transparent);
   opacity: 0.7;
 }
@@ -1145,7 +1145,7 @@ main:focus {
   aspect-ratio: 1;
   border: 1px solid #456358;
   border-radius: 8px;
-  box-shadow: 0 5px 0 #071b20;
+  box-shadow: 0 5px 0 #10172c;
 }
 .detail-art .product-art > img {
   object-fit: contain;
@@ -1211,7 +1211,7 @@ main:focus {
   align-items: center;
   gap: 12px;
   padding: 17px 20px;
-  background: #193d37;
+  background: #2d3451;
   border: 1px solid #456952;
   border-radius: 5px;
   color: #d7eac9;
@@ -1271,7 +1271,7 @@ main:focus {
 }
 .specification {
   padding: 28px 30px;
-  background: #153337;
+  background: #242c48;
   border: 1px solid #3c5b53;
   border-radius: 7px;
 }
@@ -1335,7 +1335,7 @@ main:focus {
   position: relative;
   border-radius: 9px;
   overflow: hidden;
-  box-shadow: 0 5px 0 #071b20;
+  box-shadow: 0 5px 0 #10172c;
 }
 .about-art .product-art {
   aspect-ratio: 1;
@@ -1389,7 +1389,7 @@ main:focus {
   padding: 35px;
   border: 1px solid #527254;
   border-radius: 8px;
-  background: #173933;
+  background: #282e4a;
   box-shadow: 0 5px 0 #071e21;
 }
 .contact-icon {
@@ -1501,7 +1501,7 @@ main:focus {
 .site-footer {
   position: relative;
   border-top: 1px solid #36574d;
-  background: #091f24;
+  background: #171a2e;
   padding-top: 42px;
   padding-bottom: 25px;
 }
@@ -1773,7 +1773,7 @@ main:focus {
     top: 100%;
     left: 24px;
     right: 24px;
-    background: #12343a;
+    background: #25263e;
     border: 1px solid #65825f;
     border-radius: 0 0 8px 8px;
     padding: 24px;
@@ -2057,8 +2057,8 @@ main:focus {
     background: linear-gradient(
       #08233177 0%,
       #062d3544 45%,
-      #0c242911 65%,
-      #0c2429 100%
+      #1c254611 65%,
+      #1c2546 100%
     );
   }
   .hero-kicker {
@@ -2178,9 +2178,9 @@ main:focus {
   .category-item:after {
     background: linear-gradient(
       90deg,
-      #112d34 23%,
-      #112d34e6 48%,
-      #112d3400 100%
+      #23243e 23%,
+      #23243ee6 48%,
+      #23243e00 100%
     );
   }
   .section {

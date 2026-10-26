@@ -31,11 +31,13 @@ npm run preview
 - `/support`: Discord-kontakt og spørgsmål/svar.
 - Ukendte adresser viser en dansk fejlside med et link tilbage til produkterne.
 
-Siden har responsiv mobilmenu, tastaturbetjening, synlige fokusmarkeringer og en Discord-dialog, der kan lukkes med Escape. Det grafiske redesign bruger fire originale, genererede Minecraft-inspirerede illustrationer i optimeret WebP samt et videreudviklet SVG-logo. Skrifttyperne Bungee og Nunito Sans hostes lokalt, så siden ikke afhænger af eksterne billed- eller skrifttjenester.
+Siden har responsiv mobilmenu, tastaturbetjening, synlige fokusmarkeringer og en Discord-dialog, der kan lukkes med Escape. Det tegnede Minecraft-univers bruger syv originale illustrationer i optimeret WebP: landskab, to figurer, forgrund og tre kategorimotiver. Skrifttyperne Bungee og Nunito Sans hostes lokalt, så siden ikke afhænger af eksterne billed- eller skrifttjenester.
 
 ## Visuel identitet
 
-Designet bruger mørk petrol, skovgrønt, en varm gylden knapfarve og en særskilt accent til hver kategori. Forsiden har en illustreret Minecraft-verden med bjerge, skov, vandfald og oplyste værksteder. Samme grafik og farver går igen på produktoversigten, produktsiderne, om-siden og support.
+Designet har tegnede konturer, cel-shading, mørk lilla/marineblå og gyldne/orange knapper. To originale figurer indrammer heroens logo og indhold, mens landskab og illustreret vegetation ligger i separate lag. Samme tegnede formsprog går igen på produktoversigten, produktsiderne, om-siden og support.
+
+Effekterne omfatter muse- og scroll-parallax, svævende figurer, glødende partikler, klikgnister, scroll-animationer, en scroll-indikator og produktkort med 3D-vip og lysrefleks. Heroens pauseknap stopper baggrundsbevægelsen. Reduceret bevægelse respekteres automatisk; partikelloopet stopper uden for viewport og i en skjult fane.
 
 Navigationen indeholder Forside, Produkter, Skripts, Plugins, Setups, Om os og Discord. Produktkort viser navn, beskrivelse, pris, Minecraft-versioner og links til produktside og Discord. Alle eksempelmarkeringer er bevaret.
 
@@ -59,7 +61,7 @@ Rediger `src/data/products.ts`. Hvert produkt har en unik `slug`, kategori, navn
 
 **Alle nuværende produkter, priser, funktioner og versionsangivelser er demonstrationsdata.** Eksempelmarkeringerne er synlige på kortene og produktsiderne. Inden åbning skal du verificere produktindhold, priser, versionsstøtte, afhængigheder og eventuelle tredjepartslicenser. Opdater derefter eksempelmarkeringerne og teksterne om, at butikken er under opbygning. Der er ingen opdigtede anmeldelser, salgstal eller kundetal.
 
-Forsidetekster, virksomhedsbeskrivelse og supportindhold redigeres i `src/App.tsx`. Tilføj dine faktiske virksomhedsoplysninger og købsvilkår inden salg. Design og responsive regler ligger i `src/styles.css`.
+Forsidetekster, virksomhedsbeskrivelse og supportindhold redigeres i `src/App.tsx`. Tilføj dine faktiske virksomhedsoplysninger og købsvilkår inden salg. Layout og responsive regler ligger i `src/styles.css`; den tegnede stil og effekterne ligger i `src/effects.css`.
 
 ## GitHub
 
@@ -110,13 +112,15 @@ Ved oprettelsen er installation og produktionsbuild gennemført med npm. Det byg
 
 ```text
 public/
-  images/                  Fire originale illustrationer i to WebP-størrelser
+  images/                  Syv originale tegnede illustrationer i to størrelser
   fonts/                   SIL Open Font License for de lokale skrifttyper
   _headers                 Sikkerhed og caching til Cloudflare Pages
   favicon.svg              MCFilers kubeikon
   robots.txt               Adgang for søgemaskiner
 src/
   components/
+    HeroScene.tsx          Lag, figurer, parallax, partikler og pause
+    MotionEffects.tsx      Scroll-animationer, fremgang og 3D-kort
     Icon.tsx               Fælles SVG-ikoner
     ProductArt.tsx         Produktillustrationer
     WorldImage.tsx         Responsiv landskabsillustration
@@ -124,6 +128,7 @@ src/
   App.tsx                  Sider, navigation, filtre og Discord-dialog
   config.ts                Discord-invitation og validering
   fonts.css                Lokalt hostede Bungee og Nunito Sans
+  effects.css              Tegnet tema, bevægelse og reduceret bevægelse
   main.tsx                 React-opstart og router
   styles.css               Design og responsive layouts
 .gitignore                 Filer, der ikke skal på GitHub

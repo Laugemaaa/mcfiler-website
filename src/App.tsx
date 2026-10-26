@@ -23,7 +23,8 @@ import {
 } from "./data/products";
 import { Icon, type IconName } from "./components/Icon";
 import { ProductArt, CategoryIllustration } from "./components/ProductArt";
-import { WorldImage } from "./components/WorldImage";
+import { HeroScene } from "./components/HeroScene";
+import { MotionEffects, tiltCard, resetCard } from "./components/MotionEffects";
 
 const DiscordContext = createContext<(product?: string) => void>(() => {});
 
@@ -273,7 +274,12 @@ const categories: {
 
 function ProductCard({ product }: { product: Product }) {
   return (
-    <article className={`product-card product-${product.visual}`}>
+    <article
+      className={`product-card product-${product.visual}`}
+      onPointerMove={tiltCard}
+      onPointerLeave={resetCard}
+      onPointerCancel={resetCard}
+    >
       <Link
         to={`/produkter/${product.slug}`}
         className="product-art-link"
@@ -412,10 +418,7 @@ function Home() {
   return (
     <>
       <section className="hero">
-        <div className="hero-landscape" aria-hidden="true">
-          <WorldImage priority />
-        </div>
-        <div className="hero-shade" />
+        <HeroScene />
         <div className="hero-copy container">
           <div className="hero-kicker">
             <span />
@@ -423,7 +426,7 @@ function Home() {
             <span />
           </div>
           <h1 className="hero-wordmark">
-            MC<span>FILER</span>
+            <span className="hero-logo-letters">MCFILER</span>
             <small>.DK</small>
           </h1>
           <h2 className="hero-tagline">
@@ -1059,6 +1062,7 @@ export default function App() {
         Spring til indhold
       </a>
       <PageEffects />
+      <MotionEffects />
       <Header />
       <main id="main-content" tabIndex={-1}>
         <Routes>
