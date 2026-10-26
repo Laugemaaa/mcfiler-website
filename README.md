@@ -31,7 +31,15 @@ npm run preview
 - `/support`: Discord-kontakt og spørgsmål/svar.
 - Ukendte adresser viser en dansk fejlside med et link tilbage til produkterne.
 
-Siden har responsiv mobilmenu, tastaturbetjening, synlige fokusmarkeringer og en Discord-dialog, der kan lukkes med Escape. Illustrationer, ikon og grafik er lavet i SVG/CSS. Skrifttyper indlæses lokalt fra brugerens system; der er ingen eksterne billed- eller skrifttjenester.
+Siden har responsiv mobilmenu, tastaturbetjening, synlige fokusmarkeringer og en Discord-dialog, der kan lukkes med Escape. Det grafiske redesign bruger fire originale, genererede Minecraft-inspirerede illustrationer i optimeret WebP samt et videreudviklet SVG-logo. Skrifttyperne Bungee og Nunito Sans hostes lokalt, så siden ikke afhænger af eksterne billed- eller skrifttjenester.
+
+## Visuel identitet
+
+Designet bruger mørk petrol, skovgrønt, en varm gylden knapfarve og en særskilt accent til hver kategori. Forsiden har en illustreret Minecraft-verden med bjerge, skov, vandfald og oplyste værksteder. Samme grafik og farver går igen på produktoversigten, produktsiderne, om-siden og support.
+
+Navigationen indeholder Forside, Produkter, Skripts, Plugins, Setups, Om os og Discord. Produktkort viser navn, beskrivelse, pris, Minecraft-versioner og links til produktside og Discord. Alle eksempelmarkeringer er bevaret.
+
+Se [grafik- og designdokumentationen](docs/visual-assets.md) for referenceanalyse, farver, billedfiler, opløsninger, præcise billedprompter og skrifttypelicenser. Alle nødvendige illustrationer er leveret i `public/images/`.
 
 ## Tilføj Discord-serveren
 
@@ -102,6 +110,8 @@ Ved oprettelsen er installation og produktionsbuild gennemført med npm. Det byg
 
 ```text
 public/
+  images/                  Fire originale illustrationer i to WebP-størrelser
+  fonts/                   SIL Open Font License for de lokale skrifttyper
   _headers                 Sikkerhed og caching til Cloudflare Pages
   favicon.svg              MCFilers kubeikon
   robots.txt               Adgang for søgemaskiner
@@ -109,11 +119,11 @@ src/
   components/
     Icon.tsx               Fælles SVG-ikoner
     ProductArt.tsx         Produktillustrationer
-    VoxelScene.tsx         Original Minecraft-inspireret voxel-illustration
+    WorldImage.tsx         Responsiv landskabsillustration
   data/products.ts         Typede eksempelprodukter og prisformatering
   App.tsx                  Sider, navigation, filtre og Discord-dialog
   config.ts                Discord-invitation og validering
-  fonts.css                Lokale systemskrifter
+  fonts.css                Lokalt hostede Bungee og Nunito Sans
   main.tsx                 React-opstart og router
   styles.css               Design og responsive layouts
 .gitignore                 Filer, der ikke skal på GitHub
@@ -124,4 +134,5 @@ package-lock.json          Fastlåste pakkeversioner
 tsconfig.json              TypeScript-konfiguration
 vite.config.ts             Vite-konfiguration
 README.md                  Denne vejledning
+docs/visual-assets.md      Referenceanalyse, grafisk identitet og billedprompter
 ```

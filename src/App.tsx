@@ -22,8 +22,8 @@ import {
   type Product,
 } from "./data/products";
 import { Icon, type IconName } from "./components/Icon";
-import { ProductArt } from "./components/ProductArt";
-import { VoxelScene } from "./components/VoxelScene";
+import { ProductArt, CategoryIllustration } from "./components/ProductArt";
+import { WorldImage } from "./components/WorldImage";
 
 const DiscordContext = createContext<(product?: string) => void>(() => {});
 
@@ -64,13 +64,20 @@ function DiscordButton({
 function Brand() {
   return (
     <Link className="brand" to="/" aria-label="MCFiler.dk, forside">
-      <svg viewBox="0 0 36 40" width="31" height="34" aria-hidden="true">
-        <path d="m18 2 17 9-17 9L1 11Z" fill="#b5e878" />
-        <path d="m1 11 17 9v18L1 29Z" fill="#759a4c" />
-        <path d="m18 20 17-9v18l-17 9Z" fill="#4e6c36" />
+      <svg viewBox="0 0 40 44" width="36" height="39" aria-hidden="true">
+        <path d="m20 2 18 10-18 10L2 12Z" fill="#a9edb0" />
+        <path d="m2 12 18 10v20L2 32Z" fill="#4eae86" />
+        <path d="m20 22 18-10v20L20 42Z" fill="#256e63" />
+        <path
+          d="m8 15 12 7 12-7M20 22v13"
+          stroke="#e2ffe8"
+          strokeOpacity=".35"
+        />
+        <path d="m20 6 9 5-9 5-9-5Z" fill="#e1f9a8" />
       </svg>
       <span>
-        MCFiler<span className="brand-domain">.dk</span>
+        MC<span className="brand-filer">Filer</span>
+        <span className="brand-domain">.dk</span>
       </span>
     </Link>
   );
@@ -78,32 +85,82 @@ function Brand() {
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
   const location = useLocation();
-  useEffect(() => setMenuOpen(false), [location.pathname, location.hash]);
+  const selectedCategory = new URLSearchParams(location.search).get("kategori");
+  useEffect(
+    () => setMenuOpen(false),
+    [location.pathname, location.search, location.hash],
+  );
   useEffect(() => {
     function closeOnEscape(event: KeyboardEvent) {
-      if (event.key === "Escape") setMenuOpen(false);
+      if (event.key === "Escape" && menuOpen) {
+        setMenuOpen(false);
+        menuButton.current?.focus();
+      }
     }
     document.addEventListener("keydown", closeOnEscape);
     return () => document.removeEventListener("keydown", closeOnEscape);
-  }, []);
+  }, [menuOpen]);
+  const navigation = (
+    <>
+      <NavLink to="/" end>
+        Forside
+      </NavLink>
+      <NavLink
+        to="/produkter"
+        className={({ isActive }) =>
+          isActive && !selectedCategory ? "active" : undefined
+        }
+      >
+        Produkter
+      </NavLink>
+      {categories.map((category) => (
+        <Link
+          key={category.name}
+          className={
+            location.pathname === "/produkter" &&
+            selectedCategory === category.name
+              ? "active"
+              : undefined
+          }
+          aria-current={
+            location.pathname === "/produkter" &&
+            selectedCategory === category.name
+              ? "page"
+              : undefined
+          }
+          to={`/produkter?kategori=${category.name}`}
+        >
+          {category.name}
+        </Link>
+      ))}
+      <NavLink to="/om-os">Om os</NavLink>
+    </>
+  );
   return (
     <header className="site-header">
+      <div className="utility-bar">
+        <div className="container">
+          <span>SMÅ FILER. STORE MULIGHEDER.</span>
+          <Link to="/support">
+            <span className="utility-dot" />
+            Bestilling & support på Discord
+            <Icon name="diagonal" size={12} />
+          </Link>
+        </div>
+      </div>
       <div className="container header-inner">
         <Brand />
         <nav className="desktop-nav" aria-label="Hovedmenu">
-          <NavLink to="/" end>
-            Forside
-          </NavLink>
-          <NavLink to="/produkter">Produkter</NavLink>
-          <NavLink to="/om-os">Om MCFiler</NavLink>
-          <NavLink to="/support">Support</NavLink>
+          {navigation}
         </nav>
         <div className="header-actions">
           <DiscordButton className="button header-discord">
-            Vores Discord
+            Discord
           </DiscordButton>
           <button
+            ref={menuButton}
             className="menu-toggle"
             type="button"
             aria-label={menuOpen ? "Luk menu" : "Åbn menu"}
@@ -116,14 +173,23 @@ function Header() {
         </div>
       </div>
       {menuOpen && (
-        <nav id="mobile-menu" className="mobile-nav" aria-label="Mobilmenu">
-          <NavLink to="/" end>
-            Forside
-          </NavLink>
-          <NavLink to="/produkter">Produkter</NavLink>
-          <NavLink to="/om-os">Om MCFiler</NavLink>
-          <NavLink to="/support">Support</NavLink>
-        </nav>
+        <>
+          <button
+            className="menu-backdrop"
+            type="button"
+            aria-label="Luk navigationsmenu"
+            tabIndex={-1}
+            onClick={() => setMenuOpen(false)}
+          />
+          <nav id="mobile-menu" className="mobile-nav" aria-label="Mobilmenu">
+            <span className="eyebrow">DIT NÆSTE SERVERPROJEKT</span>
+            {navigation}
+            <NavLink to="/support">Kontakt & support</NavLink>
+            <DiscordButton className="button button-primary">
+              Besøg Discord
+            </DiscordButton>
+          </nav>
+        </>
       )}
     </header>
   );
@@ -134,27 +200,45 @@ function Footer() {
     <footer className="site-footer">
       <div className="container">
         <div className="footer-top">
-          <div>
+          <div className="footer-intro">
             <Brand />
-            <p>Små filer. Store muligheder.</p>
+            <p>
+              Danske byggeklodser til din næste Minecraft-verden.
+              <br />
+              Skabt til dig, der har mere at bygge.
+            </p>
           </div>
-          <nav aria-label="Sidefod">
-            <Link to="/produkter">Produkter</Link>
-            <Link to="/om-os">Om MCFiler</Link>
-            <Link to="/support">Kontakt & support</Link>
+          <nav aria-label="Produkter i sidefod">
+            <span className="footer-label">BYG VIDERE</span>
+            {categories.map((category) => (
+              <Link
+                key={category.name}
+                to={`/produkter?kategori=${category.name}`}
+              >
+                {category.name}
+              </Link>
+            ))}
           </nav>
-          <DiscordButton className="footer-discord">
-            Vi ses på Discord
-          </DiscordButton>
+          <nav aria-label="Information i sidefod">
+            <span className="footer-label">MCFILER</span>
+            <Link to="/om-os">Om os</Link>
+            <Link to="/support">Kontakt & support</Link>
+            <Link to="/produkter">Alle produkter</Link>
+          </nav>
+          <div className="footer-community">
+            <span className="footer-label">SKAL VI TALE MINECRAFT?</span>
+            <DiscordButton className="button footer-discord">
+              Besøg Discord
+            </DiscordButton>
+            <span className="danish-label">
+              Dansk butik. Personlig kontakt.
+            </span>
+          </div>
         </div>
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} MCFiler.dk</span>
-          <span>
-            En uafhængig butik. Ikke tilknyttet Mojang eller Microsoft.
-          </span>
-          <span className="danish-label">
-            <span aria-hidden="true">🇩🇰</span> På dansk, selvfølgelig.
-          </span>
+          <span>Ikke tilknyttet eller godkendt af Mojang eller Microsoft.</span>
+          <span>Byg noget, der er dit eget.</span>
         </div>
       </div>
     </footer>
@@ -189,33 +273,59 @@ const categories: {
 
 function ProductCard({ product }: { product: Product }) {
   return (
-    <article className="product-card">
+    <article className={`product-card product-${product.visual}`}>
       <Link
         to={`/produkter/${product.slug}`}
         className="product-art-link"
         aria-label={`Se ${product.name}`}
       >
         <ProductArt type={product.visual} />
+        <span className="art-open">
+          <Icon name="diagonal" size={20} />
+        </span>
       </Link>
       <div className="product-card-content">
         <div className="product-meta">
-          <span>{product.category}</span>
+          <span className="category-badge">
+            <Icon
+              name={
+                product.visual === "script"
+                  ? "code"
+                  : product.visual === "plugin"
+                    ? "cube"
+                    : "layers"
+              }
+              size={13}
+            />
+            {product.category}
+          </span>
           <span className="example-tag">Eksempel</span>
         </div>
         <Link className="product-title" to={`/produkter/${product.slug}`}>
           <h3>{product.name}</h3>
-          <Icon name="diagonal" size={19} />
         </Link>
         <p>{product.description}</p>
+        <div className="card-versions">
+          <span className="version-dot" />
+          <span>Minecraft {product.versions}</span>
+          <span className="version-example">Eksempel</span>
+        </div>
         <div className="product-card-bottom">
           <div className="price">
             {formatPrice(product.price)}
             <small>Eksempelpris</small>
           </div>
-          <DiscordButton product={product.name} className="button button-buy">
-            Køb via Discord
-          </DiscordButton>
+          <Link
+            className="button button-card"
+            to={`/produkter/${product.slug}`}
+          >
+            Se produkt
+            <Icon name="arrow" size={16} />
+          </Link>
         </div>
+        <DiscordButton product={product.name} className="product-discord">
+          Køb via Discord
+        </DiscordButton>
       </div>
     </article>
   );
@@ -271,20 +381,28 @@ function FilterButtons({
 function SupportBanner() {
   return (
     <section className="support-banner">
-      <div className="support-symbol">
-        <Icon name="discord" size={34} />
+      <div className="support-banner-art" aria-hidden="true">
+        <CategoryIllustration type="setup" />
       </div>
-      <div>
-        <span className="eyebrow">LAD OS TALE MINECRAFT</span>
-        <h2>Din næste idé starter med en samtale.</h2>
+      <div className="support-banner-content">
+        <span className="eyebrow">SAMMEN OM DIN NÆSTE VERDEN</span>
+        <h2>
+          En god idé starter
+          <br />
+          med en samtale.
+        </h2>
         <p>
-          Spørg ind til et produkt, eller få hjælp til at finde det rigtige til
-          din server.
+          Spørg ind til et produkt, få hjælp til din server,
+          <br className="desktop-break" /> eller fortæl os, hvad du drømmer om
+          at bygge.
         </p>
+        <DiscordButton className="button button-primary">
+          Besøg Discord
+        </DiscordButton>
       </div>
-      <DiscordButton className="button button-light">
-        Find os på Discord
-      </DiscordButton>
+      <span className="banner-coordinate" aria-hidden="true">
+        NÆSTE STOP: DIN SERVER
+      </span>
     </section>
   );
 }
@@ -293,106 +411,128 @@ function Home() {
   const [category, setCategory] = useState<Category | "Alle">("Alle");
   return (
     <>
-      <section className="hero container">
-        <div className="hero-copy">
+      <section className="hero">
+        <div className="hero-landscape" aria-hidden="true">
+          <WorldImage priority />
+        </div>
+        <div className="hero-shade" />
+        <div className="hero-copy container">
           <div className="hero-kicker">
-            <span /> DIN DANSKE MINECRAFT-BUTIK
+            <span />
+            DIN DANSKE MINECRAFT-BUTIK
+            <span />
           </div>
-          <h1>
-            Din server.
-            <br />
-            Dine idéer.
-            <br />
-            <span>Vores byggeklodser.</span>
+          <h1 className="hero-wordmark">
+            MC<span>FILER</span>
+            <small>.DK</small>
           </h1>
+          <h2 className="hero-tagline">
+            Små filer. <span>Store eventyr.</span>
+          </h2>
           <p>
-            Skripts, Plugins og komplette serveropsætninger.
-            <br className="desktop-break" /> Til dig, der vil skabe noget,
-            spillerne vender tilbage til.
+            Giv din server liv med Skripts, Plugins og komplette Setups.
+            <br className="desktop-break" /> Du har idéerne. Vi har dine næste
+            byggeklodser.
           </p>
           <div className="hero-actions">
             <Link className="button button-primary" to="/produkter">
-              Udforsk produkterne
+              <Icon name="cube" size={20} />
+              Udforsk produkter
               <Icon name="arrow" size={18} />
             </Link>
-            <Link className="text-link" to="/om-os">
-              Lær MCFiler at kende
-              <Icon name="diagonal" size={16} />
-            </Link>
+            <DiscordButton className="button button-secondary">
+              Besøg Discord
+            </DiscordButton>
           </div>
           <div className="hero-note">
-            <Icon name="chat" size={15} /> Bestilling og personlig kontakt via
-            Discord
+            <Icon name="chat" size={15} />
+            Bestilling og personlig kontakt via Discord
           </div>
         </div>
-        <div className="hero-visual">
-          <div className="scene-topline">
-            <span>EN VERDEN AF MULIGHEDER</span>
-            <span>MC / DK</span>
-          </div>
-          <VoxelScene />
-          <div className="scene-bottomline">
-            <span className="tiny-cross">+</span>
-            <span>Det hele begynder med en byggeklods.</span>
-            <span className="tiny-cross">+</span>
-          </div>
-        </div>
+        <a
+          className="hero-scroll"
+          href="#kategorier"
+          aria-label="Se vores produktkategorier"
+        >
+          <span>DIT NÆSTE EVENTYR STARTER HER</span>
+          <Icon name="chevron" size={21} />
+        </a>
       </section>
-      <div className="container">
-        <section className="category-strip" aria-label="Produktkategorier">
-          {categories.map((category) => (
+      <section
+        className="category-section container"
+        id="kategorier"
+        aria-label="Produktkategorier"
+      >
+        <div className="category-strip">
+          {categories.map((category, index) => (
             <Link
               to={`/produkter?kategori=${category.name}`}
-              className="category-item"
+              className={`category-item category-${["script", "plugin", "setup"][index]}`}
               key={category.name}
             >
-              <div className="category-icon">
-                <Icon name={category.icon} size={24} />
-              </div>
-              <div>
+              <div className="category-copy">
+                <span className="category-overline">
+                  {category.index} / BYG VIDERE
+                </span>
                 <h2>{category.name}</h2>
                 <p>{category.description}</p>
+                <span className="category-link">
+                  Udforsk
+                  <Icon name="arrow" size={16} />
+                </span>
               </div>
-              <Icon name="diagonal" className="category-arrow" size={19} />
+              <CategoryIllustration
+                type={(["script", "plugin", "setup"] as const)[index]}
+                className="category-illustration"
+              />
             </Link>
           ))}
-        </section>
-      </div>
+        </div>
+      </section>
       <section className="section container" id="produkter">
         <div className="section-heading">
           <div>
-            <span className="eyebrow">BYG VIDERE PÅ DIN SERVER</span>
+            <span className="eyebrow">KLAR TIL DIN NÆSTE IDÉ?</span>
             <h2>
-              Find din næste byggeklods<span className="green-dot">.</span>
+              Find dine <span>byggeklodser.</span>
             </h2>
+            <p>
+              Små forbedringer eller en helt ny begyndelse. Her starter det.
+            </p>
           </div>
           <Link to="/produkter" className="text-link">
             Se alle produkter
-            <Icon name="arrow" size={17} />
+            <Icon name="arrow" size={18} />
           </Link>
         </div>
         <div className="catalogue-toolbar">
           <FilterButtons value={category} onChange={setCategory} />
-          <span className="catalogue-note">Et indblik i det, der kommer.</span>
-        </div>
-        <div className="demo-notice">
-          <span className="notice-dot" />
-          <p>
-            Butikken er under opbygning. Produkter, priser og versionsangivelser
-            nedenfor er eksempler.
-          </p>
+          <span className="catalogue-note">
+            <span className="notice-dot" />
+            Butikken er under opbygning
+          </span>
         </div>
         <ProductGrid selected={category} />
+        <div className="demo-notice">
+          <Icon name="chat" size={15} />
+          <p>
+            Et kig ind i den kommende butik. Alle produkter, priser, funktioner
+            og versionsangivelser er midlertidige eksempler.
+          </p>
+        </div>
       </section>
       <section className="how-section">
         <div className="container">
           <div className="how-intro">
-            <span className="eyebrow">FRA IDÉ TIL SERVER</span>
-            <h2>Enkelt hele vejen.</h2>
-            <p>
-              Vi samler dialogen ét sted.
+            <span className="eyebrow">FRA FØRSTE IDÉ TIL DIN SERVER</span>
+            <h2>
+              Tre skridt.
               <br />
-              Så der er plads til det, du gerne vil bygge.
+              <span>Uendelige muligheder.</span>
+            </h2>
+            <p>
+              Vi holder det enkelt og samler samtalen på Discord, så du kan
+              fokusere på det, du vil bygge.
             </p>
             <Link className="text-link" to="/support">
               Sådan foregår det
@@ -402,31 +542,54 @@ function Home() {
           <div className="steps">
             {[
               {
-                title: "Find det, du mangler",
-                text: "Udforsk produkterne, og læs om funktioner og krav til din server.",
+                title: "Find din byggeklods",
+                text: "Udforsk produkterne, og find funktionerne, din server mangler.",
                 icon: "cube",
               },
               {
-                title: "Tag snakken på Discord",
-                text: "Vi afklarer kompatibilitet, indhold og pris, før du bestiller.",
+                title: "Tag snakken med os",
+                text: "På Discord afklarer vi indhold, kompatibilitet og pris før bestilling.",
                 icon: "chat",
               },
               {
-                title: "Gør det til dit eget",
+                title: "Byg dit næste eventyr",
                 text: "Bestilling, betaling og aftale om levering foregår direkte på Discord.",
-                icon: "download",
+                icon: "layers",
               },
             ].map((step, i) => (
               <div className="step" key={step.title}>
                 <div className="step-top">
                   <span>0{i + 1}</span>
-                  <Icon name={step.icon as IconName} size={22} />
+                  <div className="step-icon">
+                    <Icon name={step.icon as IconName} size={24} />
+                  </div>
                 </div>
                 <h3>{step.title}</h3>
                 <p>{step.text}</p>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+      <section className="about-teaser container">
+        <div className="teaser-art">
+          <CategoryIllustration type="script" />
+        </div>
+        <div className="teaser-copy">
+          <span className="eyebrow">MINECRAFT ER BEDRE MED GODE IDÉER</span>
+          <h2>
+            Til dem, der altid
+            <br />
+            <span>bygger videre.</span>
+          </h2>
+          <p>
+            En ny funktion. Et nyt fællesskab. En helt ny verden. MCFiler er en
+            dansk butik for dig, der vil gøre mere med din Minecraft-server.
+          </p>
+          <Link className="text-link" to="/om-os">
+            Lær MCFiler at kende
+            <Icon name="arrow" size={18} />
+          </Link>
         </div>
       </section>
       <div className="container support-section">
@@ -502,7 +665,7 @@ function ProductPage() {
       </nav>
       <div className="product-detail-grid">
         <div className="detail-art">
-          <ProductArt type={product.visual} />
+          <ProductArt type={product.visual} priority />
           <p>
             <Icon name="cube" size={16} /> Illustration af et eksempelprodukt
           </p>
@@ -639,7 +802,7 @@ function About() {
           </div>
         </section>
         <div className="about-art">
-          <VoxelScene compact />
+          <ProductArt type="setup" priority />
           <span>SMÅ FILER. STORE MULIGHEDER.</span>
         </div>
       </div>
@@ -784,24 +947,34 @@ function NotFound() {
 
 function DiscordDialog({
   product,
+  returnFocusTo,
   onClose,
 }: {
   product: string | undefined;
+  returnFocusTo: HTMLElement | null;
   onClose: () => void;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     const dialog = ref.current;
     dialog?.showModal();
-    return () => dialog?.close();
-  }, []);
+    return () => {
+      dialog?.close();
+      if (returnFocusTo?.isConnected) {
+        returnFocusTo.focus({ preventScroll: true });
+      }
+    };
+  }, [returnFocusTo]);
   return (
     <dialog
       className="discord-dialog"
       ref={ref}
       aria-labelledby="discord-title"
       aria-describedby="discord-description"
-      onCancel={onClose}
+      onCancel={(event) => {
+        event.preventDefault();
+        onClose();
+      }}
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
@@ -866,9 +1039,22 @@ function PageEffects() {
 }
 
 export default function App() {
-  const [dialog, setDialog] = useState<{ product?: string } | null>(null);
+  const [dialog, setDialog] = useState<{
+    product?: string;
+    trigger: HTMLElement | null;
+  } | null>(null);
   return (
-    <DiscordContext.Provider value={(product) => setDialog({ product })}>
+    <DiscordContext.Provider
+      value={(product) =>
+        setDialog({
+          product,
+          trigger:
+            document.activeElement instanceof HTMLElement
+              ? document.activeElement
+              : null,
+        })
+      }
+    >
       <a className="skip-link" href="#main-content">
         Spring til indhold
       </a>
@@ -888,6 +1074,7 @@ export default function App() {
       {dialog && (
         <DiscordDialog
           product={dialog.product}
+          returnFocusTo={dialog.trigger}
           onClose={() => setDialog(null)}
         />
       )}
