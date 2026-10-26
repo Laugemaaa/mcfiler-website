@@ -37,6 +37,8 @@ Siden har responsiv mobilmenu, tastaturbetjening, synlige fokusmarkeringer og en
 
 Designet har tegnede konturer, cel-shading, mørk lilla/marineblå og gyldne/orange knapper. En betjent til venstre og en fange til højre indrammer logo og indhold. Baggrunden er et koderværelse med en person ved computeren, og forgrunden viser gulv, bøger og kabler i et separat lag. Samme tegnede formsprog går igen på produktoversigten, produktsiderne, om-siden og support.
 
+Det aktuelle billedsæt er forenklet med firkantede hoveder, blokhænder, store farveflader og færre detaljer. Alle syv motiver følger denne retning. Billederne er AI-genereret som en stiltilnærmelse til brugerens reference og er ikke manuelt tegnede.
+
 Effekterne omfatter muse- og scroll-parallax, svævende figurer, glødende partikler, klikgnister, scroll-animationer, en scroll-indikator og produktkort med 3D-vip og lysrefleks. Heroens pauseknap stopper baggrundsbevægelsen. Reduceret bevægelse respekteres automatisk; partikelloopet stopper uden for viewport og i en skjult fane.
 
 Navigationen indeholder Forside, Produkter, Skripts, Plugins, Setups, Om os og Discord. Produktkort viser navn, beskrivelse, pris, Minecraft-versioner og links til produktside og Discord. Alle eksempelmarkeringer er bevaret.

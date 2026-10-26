@@ -14,8 +14,8 @@ type Particle = {
 };
 
 const characterArt = {
-  left: "prison-officer",
-  right: "prison-inmate",
+  left: "block-officer",
+  right: "block-inmate",
 } as const;
 
 export function HeroScene() {
@@ -238,7 +238,7 @@ export function HeroScene() {
               srcSet={`/images/${characterArt[side]}-384.webp 384w, /images/${characterArt[side]}-768.webp 768w`}
               sizes="(max-width: 700px) 52vw, (max-width: 1600px) 28vw, 480px"
               width="768"
-              height="1152"
+              height={side === "left" ? 1307 : 1308}
               alt=""
               decoding="async"
               fetchPriority="low"
@@ -248,8 +248,8 @@ export function HeroScene() {
         <canvas className="scene-particles" ref={canvasRef} />
         <div className="hero-foreground" data-parallax=".2">
           <img
-            src="/images/coding-room-foreground-1672.webp"
-            srcSet="/images/coding-room-foreground-960.webp 960w, /images/coding-room-foreground-1672.webp 1672w"
+            src="/images/block-room-foreground-1672.webp"
+            srcSet="/images/block-room-foreground-960.webp 960w, /images/block-room-foreground-1672.webp 1672w"
             sizes="100vw"
             width="1672"
             height="941"

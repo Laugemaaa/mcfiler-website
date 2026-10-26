@@ -12,8 +12,8 @@ export function CategoryIllustration({
   return (
     <img
       className={className}
-      src={`/images/drawn-${type}-480.webp`}
-      srcSet={`/images/drawn-${type}-480.webp 480w, /images/drawn-${type}-960.webp 960w`}
+      src={`/images/block-${type}-480.webp`}
+      srcSet={`/images/block-${type}-480.webp 480w, /images/block-${type}-960.webp 960w`}
       sizes="(max-width: 650px) 90vw, (max-width: 1000px) 45vw, 400px"
       width="960"
       height="960"
