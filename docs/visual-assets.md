@@ -1,3 +1,5 @@
+> Historisk billeddokumentation. Aktuelt design og nye illustrationer er beskrevet i [design-world.md](design-world.md).
+
 # Aktuelt butikslayout
 
 Opdateret 17. november 2026. Kompositionen er forenklet med inspiration fra brugerens MCSETUPS-skærmbillede og https://mcsetups.dk/: kompakt navigation, kort introduktion, kategorier og produktgitter. Ingen aktiver fra MCSETUPS er kopieret.

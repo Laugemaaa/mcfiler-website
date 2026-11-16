@@ -24,24 +24,22 @@ npm run preview
 
 ## Sider og funktioner
 
-- `/`: Forside med introduktion, kategorier, eksempelprodukter og Discord-kontakt.
+- `/`: Forside med introduktion, kategorier, eksempelprodukter bestillingsforløb og Discord-kontakt.
 - `/produkter`: Produktoversigt med kategorifiltre. Filteret kan deles, eksempelvis `/produkter?kategori=Plugins`.
 - `/produkter/essentials-skript`, `/produkter/jobs-plugin` og `/produkter/survival-setup`: Produktsider med funktioner, eksempelpris, Minecraft-versioner og krav.
 - `/om-os`: Information om MCFiler.
 - `/support`: Discord-kontakt og spørgsmål/svar.
 - Ukendte adresser viser en dansk fejlside med et link tilbage til produkterne.
 
-Siden har responsiv mobilmenu, tastaturbetjening, synlige fokusmarkeringer og en Discord-dialog, der kan lukkes med Escape. Nunito Sans hostes lokalt.
+Siden har responsiv mobilmenu, tastaturbetjening, synlige fokusmarkeringer og en Discord-dialog, der kan lukkes med Escape. Nunito Sans og Bungee hostes lokalt.
 
 ## Visuel identitet
 
-Layoutet er forenklet efter MCSETUPS-referencen: lys baggrund, kompakt introduktion, tre tydelige kategorier og et overskueligt produktgitter. Grøn bruges som primær accent, mens kategorierne har afdæmpede grønne, blå og sandfarvede felter. MCSETUPS' grafik, produkter og kundepåstande er ikke kopieret.
+MCFiler har en selvstændig komposition: todelt introduktion med et originalt illustreret Prison-værksted, mørk kategoribjælke, samlet produktområde, bestillingsforløb og indgange til information og support. MCSETUPS har inspireret indholdstyperne, mens Mineplex-referencerne har inspireret de malede himmelflader, orange knapper, tydelige bundkanter og karakteristisk typografi. Ingen af referencesidernes aktiver eller logoer er kopieret.
 
-Den store illustrerede hero, sidefigurer, partikler, parallax, klikgnister, scroll-animationer, 3D-vip og animerede sideskift er fjernet. Kun korte farveskift på knapper og links er bevaret. Produktillustrationerne er de eksisterende AI-genererede eksempelbilleder. De tidligere scenebilleder er bevaret i billedmappen, men indlæses ikke.
+Farverne er turkis, creme, orange og mørk blå med blå/lilla/grønne kategorier. Nunito Sans og Bungee hostes lokalt. Illustrationerne er AI-genererede stiltilnærmelser. Der er ingen parallax, partikler, løbende animationer eller animerede sideskift.
 
-Navigationen indeholder Forside, Produkter, Skripts, Plugins, Setups, Om os og Discord. Produktkort viser navn, beskrivelse, eksempelpris, Minecraft-versioner og links til produktside og Discord.
-
-Se [grafikdokumentationen](docs/visual-assets.md) for billedfiler og oprindelige billedprompter.
+Layoutets basis ligger i `src/styles.css`, og det illustrerede tema ligger i `src/world.css`. Se [design, aktiver og præcise billedprompter](docs/design-world.md). De ældre billedprompter er bevaret i [grafikarkivet](docs/visual-assets.md).
 
 ## Tilføj Discord-serveren
 
@@ -126,7 +124,8 @@ src/
   config.ts                Discord-invitation og validering
   fonts.css                Lokalt hostet Nunito Sans
   main.tsx                 React-opstart og router
-  styles.css               Design og responsive layouts
+  styles.css               Grundlayout og responsive regler
+  world.css                Illustreret identitet og nye sektioner
 .gitignore                 Filer, der ikke skal på GitHub
 .node-version              Node.js-version til hosting
 index.html                 Dansk grunddokument og metadata

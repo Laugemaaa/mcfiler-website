@@ -396,69 +396,165 @@ function SupportBanner() {
 function Home() {
   const [category, setCategory] = useState<Category | "Alle">("Alle");
   return (
-    <div className="container home-content">
-      <section className="shop-intro">
-        <div>
-          <span className="eyebrow">MCFILER · DANSKE MINECRAFT-FILER</span>
-          <h1>Det næste til din Prison-server.</h1>
+    <>
+      <section className="world-hero container">
+        <div className="world-hero-copy">
+          <span className="eyebrow">DANSKE FILER. DIN EGEN SERVER.</span>
+          <h1>
+            Din Prison.
+            <br />
+            <span>Dine spilleregler.</span>
+          </h1>
           <p>
-            Skripts, Plugins og komplette Setups. Find dine filer, og tag
-            snakken med os på Discord.
+            Giv din server nye muligheder med Skripts, Plugins og Setups. Vi
+            samler filerne — du bygger fællesskabet.
           </p>
-        </div>
-        <Link className="button button-primary" to="/produkter">
-          Udforsk produkter
-          <Icon name="arrow" size={18} />
-        </Link>
-      </section>
-      <section
-        className="category-section"
-        id="kategorier"
-        aria-labelledby="category-heading"
-      >
-        <h2 id="category-heading">Kategorier</h2>
-        <div className="category-strip">
-          {categories.map((category, index) => (
-            <Link
-              to={`/produkter?kategori=${category.name}`}
-              className={`category-item category-${["script", "plugin", "setup"][index]}`}
-              key={category.name}
-            >
-              <Icon name={category.icon} size={30} />
-              <div>
-                <h3>{category.name}</h3>
-                <p>{category.description}</p>
-              </div>
-              <Icon name="arrow" size={20} />
+          <div className="hero-actions">
+            <Link className="button button-primary" to="/produkter">
+              Udforsk produkter
+              <Icon name="arrow" size={18} />
             </Link>
-          ))}
-        </div>
-      </section>
-      <section className="section" id="produkter">
-        <div className="section-heading">
-          <div>
-            <h2>Udforsk produkterne</h2>
-            <p>Et første kig på den kommende butik.</p>
+            <DiscordButton>Besøg Discord</DiscordButton>
           </div>
-          <Link to="/produkter" className="text-link">
-            Se alle produkter
-            <Icon name="arrow" size={17} />
-          </Link>
+          <span className="hero-caption">
+            <Icon name="chat" size={15} />
+            Dansk butik · Bestilling via Discord
+          </span>
         </div>
-        <div className="catalogue-toolbar">
-          <FilterButtons value={category} onChange={setCategory} />
-        </div>
-        <ProductGrid selected={category} />
-        <div className="demo-notice">
-          <Icon name="chat" size={16} />
-          <p>
-            Butikken er under opbygning. Alle produkter, priser, funktioner og
-            versioner er midlertidige eksempler.
-          </p>
+        <div className="world-hero-art">
+          <img
+            src="/images/prison-workshop-1440.webp"
+            srcSet="/images/prison-workshop-800.webp 800w, /images/prison-workshop-1440.webp 1440w"
+            sizes="(max-width: 750px) 100vw, 55vw"
+            width="1440"
+            height="810"
+            alt="Tegnet Prison-værksted med blokbygget tårn, minevogn og turkis himmel"
+            fetchPriority="high"
+          />
+          <span className="workshop-label">
+            <Icon name="code" size={17} />
+            NÆSTE STOP: DIN SERVER
+          </span>
         </div>
       </section>
-      <SupportBanner />
-    </div>
+      <div className="container home-content">
+        <section
+          className="category-dock"
+          id="kategorier"
+          aria-labelledby="category-heading"
+        >
+          <div className="dock-heading">
+            <span className="eyebrow">VÆLG DIN BYGGEKLODS</span>
+            <h2 id="category-heading">Hvad bygger du med?</h2>
+          </div>
+          <div className="category-strip">
+            {categories.map((category, index) => (
+              <Link
+                to={`/produkter?kategori=${category.name}`}
+                className={`category-item category-${["script", "plugin", "setup"][index]}`}
+                key={category.name}
+              >
+                <span className="category-emblem">
+                  <Icon name={category.icon} size={26} />
+                </span>
+                <div>
+                  <h3>{category.name}</h3>
+                  <p>{category.description}</p>
+                </div>
+                <Icon name="arrow" size={17} />
+              </Link>
+            ))}
+          </div>
+        </section>
+        <section className="shop-sheet section" id="produkter">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">FILER TIL DIT NÆSTE PROJEKT</span>
+              <h2>Små filer. Store muligheder.</h2>
+              <p>
+                Udforsk den kommende butik — alle produkter er foreløbige
+                eksempler.
+              </p>
+            </div>
+            <Link to="/produkter" className="text-link">
+              Hele udvalget
+              <Icon name="arrow" size={17} />
+            </Link>
+          </div>
+          <div className="catalogue-toolbar">
+            <FilterButtons value={category} onChange={setCategory} />
+          </div>
+          <ProductGrid selected={category} />
+          <div className="demo-notice">
+            <Icon name="chat" size={16} />
+            <p>
+              Eksempelprodukter: priser, funktioner og Minecraft-versioner er
+              midlertidige og skal bekræftes inden lancering.
+            </p>
+          </div>
+        </section>
+        <section className="order-station">
+          <div className="order-intro">
+            <span className="eyebrow">FRA IDÉ TIL SERVER</span>
+            <h2>
+              Vi tager snakken.
+              <br />
+              Du tager næste skridt.
+            </h2>
+            <p>
+              Mangler du en bestemt funktion? Fortæl os om dit projekt, så
+              afklarer vi mulighederne på Discord.
+            </p>
+            <DiscordButton className="button button-primary">
+              Tal med os på Discord
+            </DiscordButton>
+          </div>
+          <ol className="order-steps">
+            <li>
+              <span>01</span>
+              <div>
+                <h3>Find dine filer</h3>
+                <p>Se funktioner og versionskrav på produktsiden.</p>
+              </div>
+            </li>
+            <li>
+              <span>02</span>
+              <div>
+                <h3>Afklar det på Discord</h3>
+                <p>Vi taler om indhold, kompatibilitet og pris.</p>
+              </div>
+            </li>
+            <li>
+              <span>03</span>
+              <div>
+                <h3>Aftal køb og levering</h3>
+                <p>Bestilling og betaling foregår direkte på Discord.</p>
+              </div>
+            </li>
+          </ol>
+        </section>
+        <div className="home-help">
+          <div>
+            <Icon name="globe" size={23} />
+            <h3>Et dansk udgangspunkt</h3>
+            <p>Prison-filer til det danske Minecraft-fællesskab.</p>
+            <Link to="/om-os" className="text-link">
+              Mød MCFiler
+              <Icon name="arrow" size={16} />
+            </Link>
+          </div>
+          <div>
+            <Icon name="chat" size={23} />
+            <h3>Hjælp til næste skridt</h3>
+            <p>Find svar om produkter, bestilling og levering.</p>
+            <Link to="/support" className="text-link">
+              Kontakt og support
+              <Icon name="arrow" size={16} />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
