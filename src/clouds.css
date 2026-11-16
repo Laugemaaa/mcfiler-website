@@ -1,0 +1,59 @@
+/* Flyt det eksisterende himmelmotiv som ét lag uden at flytte indholdet. */
+body {
+  background-image: none;
+}
+#root {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+}
+.cloud-background {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1140px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+.cloud-background-plane {
+  position: absolute;
+  inset: 0 -70px;
+  background: url("/images/painted-sky-1672.webp") center top / 100% 1140px
+    no-repeat;
+  animation: cloud-drift 48s ease-in-out infinite alternate;
+}
+.cloud-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, #c8efec00 650px, #c8efec 1120px);
+}
+.cloud-background[data-paused="true"] .cloud-background-plane {
+  animation-play-state: paused;
+}
+@keyframes cloud-drift {
+  from {
+    transform: translateX(-52px);
+  }
+  to {
+    transform: translateX(52px);
+  }
+}
+@media (max-width: 650px) {
+  .cloud-background {
+    height: 1050px;
+  }
+  .cloud-background-plane {
+    background-image: url("/images/painted-sky-960.webp");
+    background-size: auto 1050px;
+  }
+  .cloud-background::after {
+    background: linear-gradient(to bottom, #c8efec00 650px, #c8efec 1000px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cloud-background-plane {
+    animation: none;
+    transform: none;
+  }
+}

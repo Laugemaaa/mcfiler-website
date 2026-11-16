@@ -25,6 +25,7 @@ import {
 import { Icon, type IconName } from "./components/Icon";
 import { ProductArt } from "./components/ProductArt";
 import { InteractionEffects } from "./components/InteractionEffects";
+import { CloudBackground } from "./components/CloudBackground";
 
 const DiscordContext = createContext<(product?: string) => void>(() => {});
 
@@ -1044,6 +1045,7 @@ export default function App() {
         })
       }
     >
+      <CloudBackground />
       <a className="skip-link" href="#main-content">
         Spring til indhold
       </a>
