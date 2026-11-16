@@ -24,28 +24,24 @@ npm run preview
 
 ## Sider og funktioner
 
-- `/`: Forside med introduktion, kategorier, eksempelprodukter og bestillingsforløb.
+- `/`: Forside med introduktion, kategorier, eksempelprodukter og Discord-kontakt.
 - `/produkter`: Produktoversigt med kategorifiltre. Filteret kan deles, eksempelvis `/produkter?kategori=Plugins`.
 - `/produkter/essentials-skript`, `/produkter/jobs-plugin` og `/produkter/survival-setup`: Produktsider med funktioner, eksempelpris, Minecraft-versioner og krav.
 - `/om-os`: Information om MCFiler.
 - `/support`: Discord-kontakt og spørgsmål/svar.
 - Ukendte adresser viser en dansk fejlside med et link tilbage til produkterne.
 
-Siden har responsiv mobilmenu, tastaturbetjening, synlige fokusmarkeringer og en Discord-dialog, der kan lukkes med Escape. Det tegnede Prison-univers bruger syv originale illustrationer i optimeret WebP: koderværelse, betjent, fange, indendørs forgrund og tre kategorimotiver. Skrifttyperne Bungee og Nunito Sans hostes lokalt, så siden ikke afhænger af eksterne billed- eller skrifttjenester.
+Siden har responsiv mobilmenu, tastaturbetjening, synlige fokusmarkeringer og en Discord-dialog, der kan lukkes med Escape. Nunito Sans hostes lokalt.
 
 ## Visuel identitet
 
-Designet har tegnede konturer, cel-shading, mørk lilla/marineblå og gyldne/orange knapper. En betjent til venstre og en fange til højre indrammer logo og indhold. Baggrunden er et koderværelse med en person ved computeren, og forgrunden viser gulv, bøger og kabler i et separat lag. Samme tegnede formsprog går igen på produktoversigten, produktsiderne, om-siden og support.
+Layoutet er forenklet efter MCSETUPS-referencen: lys baggrund, kompakt introduktion, tre tydelige kategorier og et overskueligt produktgitter. Grøn bruges som primær accent, mens kategorierne har afdæmpede grønne, blå og sandfarvede felter. MCSETUPS' grafik, produkter og kundepåstande er ikke kopieret.
 
-Det aktuelle billedsæt er forenklet med firkantede hoveder, blokhænder, store farveflader og færre detaljer. Alle syv motiver følger denne retning. Billederne er AI-genereret som en stiltilnærmelse til brugerens reference og er ikke manuelt tegnede.
+Den store illustrerede hero, sidefigurer, partikler, parallax, klikgnister, scroll-animationer, 3D-vip og animerede sideskift er fjernet. Kun korte farveskift på knapper og links er bevaret. Produktillustrationerne er de eksisterende AI-genererede eksempelbilleder. De tidligere scenebilleder er bevaret i billedmappen, men indlæses ikke.
 
-Effekterne omfatter muse- og scroll-parallax, svævende figurer, glødende partikler, klikgnister, scroll-animationer, en scroll-indikator og produktkort med 3D-vip og lysrefleks. Heroens pauseknap stopper baggrundsbevægelsen. Reduceret bevægelse respekteres automatisk; partikelloopet stopper uden for viewport og i en skjult fane.
+Navigationen indeholder Forside, Produkter, Skripts, Plugins, Setups, Om os og Discord. Produktkort viser navn, beskrivelse, eksempelpris, Minecraft-versioner og links til produktside og Discord.
 
-Navigationen indeholder Forside, Produkter, Skripts, Plugins, Setups, Om os og Discord. Produktkort viser navn, beskrivelse, pris, Minecraft-versioner og links til produktside og Discord. Alle eksempelmarkeringer er bevaret.
-
-Sideskift har en kort fade/slide-overgang via Reacts ViewTransition, og topmenuens gyldne markering glider til det aktive link. På mobil lukker menuen, så overgangen kan ses. Browsere uden View Transitions får en lettere indgangsanimation. Reduceret bevægelse slår overgangene fra.
-
-Se [grafik- og designdokumentationen](docs/visual-assets.md) for referenceanalyse, farver, billedfiler, opløsninger, præcise billedprompter og skrifttypelicenser. Alle nødvendige illustrationer er leveret i `public/images/`.
+Se [grafikdokumentationen](docs/visual-assets.md) for billedfiler og oprindelige billedprompter.
 
 ## Tilføj Discord-serveren
 
@@ -65,7 +61,7 @@ Rediger `src/data/products.ts`. Hvert produkt har en unik `slug`, kategori, navn
 
 **Alle nuværende produkter, priser, funktioner og versionsangivelser er demonstrationsdata.** Eksempelmarkeringerne er synlige på kortene og produktsiderne. Inden åbning skal du verificere produktindhold, priser, versionsstøtte, afhængigheder og eventuelle tredjepartslicenser. Opdater derefter eksempelmarkeringerne og teksterne om, at butikken er under opbygning. Der er ingen opdigtede anmeldelser, salgstal eller kundetal.
 
-Forsidetekster, virksomhedsbeskrivelse og supportindhold redigeres i `src/App.tsx`. Tilføj dine faktiske virksomhedsoplysninger og købsvilkår inden salg. Layout og responsive regler ligger i `src/styles.css`; den tegnede stil og effekterne ligger i `src/effects.css`.
+Forsidetekster, virksomhedsbeskrivelse og supportindhold redigeres i `src/App.tsx`. Tilføj dine faktiske virksomhedsoplysninger og købsvilkår inden salg. Layout og responsive regler ligger i `src/styles.css`.
 
 ## GitHub
 
@@ -112,29 +108,23 @@ Se [Cloudflares officielle React-guide](https://developers.cloudflare.com/pages/
 
 ## Projektfiler
 
-Ved oprettelsen er installation og produktionsbuild gennemført med npm. Det byggede `dist/` er kontrolleret i Chrome: navigation, direkte indlæsning af produktsider, kategorifiltre, browserhistorik, Discord-dialog, mobilmenu og spørgsmål/svar. Alle otte sidetyper er kontrolleret ved 320, 375, 390, 768, 1024, 1440 og 1920 px uden vandret overløb eller browserfejl. Cloudflare-deployment er ikke udført.
+Ved oprettelsen er installation og produktionsbuild gennemført med npm. Det byggede `dist/` er kontrolleret i Chrome: navigation, direkte indlæsning af produktsider, kategorifiltre, browserhistorik, Discord-dialog, mobilmenu og spørgsmål/svar. Alle otte sidetyper er kontrolleret ved 320, 375, 390, 768, 1024, 1440 og 1920 px uden vandret overløb eller browserfejl. Siden udgives via GitHub til Cloudflare Pages.
 
 ```text
 public/
-  images/                  Syv originale tegnede illustrationer i to størrelser
+  images/                  Produktillustrationer og arkiverede scenebilleder
   fonts/                   SIL Open Font License for de lokale skrifttyper
   _headers                 Sikkerhed og caching til Cloudflare Pages
   favicon.svg              MCFilers kubeikon
   robots.txt               Adgang for søgemaskiner
 src/
   components/
-    HeroScene.tsx          Lag, figurer, parallax, partikler og pause
-    MotionEffects.tsx      Scroll-animationer, fremgang og 3D-kort
-    NavIndicator.tsx       Glidende markering af aktivt menupunkt
-    PageTransition.tsx     Sideskift, fallback og reduceret bevægelse
     Icon.tsx               Fælles SVG-ikoner
     ProductArt.tsx         Produktillustrationer
-    WorldImage.tsx         Responsiv landskabsillustration
   data/products.ts         Typede eksempelprodukter og prisformatering
   App.tsx                  Sider, navigation, filtre og Discord-dialog
   config.ts                Discord-invitation og validering
-  fonts.css                Lokalt hostede Bungee og Nunito Sans
-  effects.css              Tegnet tema, bevægelse og reduceret bevægelse
+  fonts.css                Lokalt hostet Nunito Sans
   main.tsx                 React-opstart og router
   styles.css               Design og responsive layouts
 .gitignore                 Filer, der ikke skal på GitHub

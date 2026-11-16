@@ -23,11 +23,7 @@ import {
   type Product,
 } from "./data/products";
 import { Icon, type IconName } from "./components/Icon";
-import { ProductArt, CategoryIllustration } from "./components/ProductArt";
-import { HeroScene } from "./components/HeroScene";
-import { MotionEffects, tiltCard, resetCard } from "./components/MotionEffects";
-import { PageTransition } from "./components/PageTransition";
-import { NavIndicator } from "./components/NavIndicator";
+import { ProductArt } from "./components/ProductArt";
 
 const DiscordContext = createContext<(product?: string) => void>(() => {});
 
@@ -90,7 +86,7 @@ function Brand() {
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
-  const navRef = useRef<HTMLElement>(null);
+
   const location = useLocation();
   const selectedCategory = new URLSearchParams(location.search).get("kategori");
   useEffect(
@@ -145,20 +141,9 @@ function Header() {
   );
   return (
     <header className="site-header">
-      <div className="utility-bar">
-        <div className="container">
-          <span>SMÅ FILER. STORE MULIGHEDER.</span>
-          <Link to="/support">
-            <span className="utility-dot" />
-            Bestilling & support på Discord
-            <Icon name="diagonal" size={12} />
-          </Link>
-        </div>
-      </div>
       <div className="container header-inner">
         <Brand />
-        <nav ref={navRef} className="desktop-nav" aria-label="Hovedmenu">
-          <NavIndicator navRef={navRef} />
+        <nav className="desktop-nav" aria-label="Hovedmenu">
           {navigation}
         </nav>
         <div className="header-actions">
@@ -287,12 +272,7 @@ const categories: {
 
 function ProductCard({ product }: { product: Product }) {
   return (
-    <article
-      className={`product-card product-${product.visual}`}
-      onPointerMove={tiltCard}
-      onPointerLeave={resetCard}
-      onPointerCancel={resetCard}
-    >
+    <article className={`product-card product-${product.visual}`}>
       <Link
         to={`/produkter/${product.slug}`}
         className="product-art-link"
@@ -400,28 +380,15 @@ function FilterButtons({
 function SupportBanner() {
   return (
     <section className="support-banner">
-      <div className="support-banner-art" aria-hidden="true">
-        <CategoryIllustration type="setup" />
-      </div>
-      <div className="support-banner-content">
-        <span className="eyebrow">SAMMEN OM DIN NÆSTE VERDEN</span>
-        <h2>
-          En god idé starter
-          <br />
-          med en samtale.
-        </h2>
+      <div>
+        <h2>Spørgsmål til din server?</h2>
         <p>
-          Spørg ind til et produkt, få hjælp til din server,
-          <br className="desktop-break" /> eller fortæl os, hvad du drømmer om
-          at bygge.
+          Vi hjælper dig videre på Discord. Bestilling og betaling aftales her.
         </p>
-        <DiscordButton className="button button-primary">
-          Besøg Discord
-        </DiscordButton>
       </div>
-      <span className="banner-coordinate" aria-hidden="true">
-        NÆSTE STOP: DIN SERVER
-      </span>
+      <DiscordButton className="button button-primary">
+        Besøg Discord
+      </DiscordButton>
     </section>
   );
 }
@@ -429,56 +396,27 @@ function SupportBanner() {
 function Home() {
   const [category, setCategory] = useState<Category | "Alle">("Alle");
   return (
-    <>
-      <section className="hero">
-        <HeroScene />
-        <div className="hero-copy container">
-          <div className="hero-kicker">
-            <span />
-            DIN DANSKE PRISON-BUTIK
-            <span />
-          </div>
-          <h1 className="hero-wordmark">
-            <span className="hero-logo-letters">MCFILER</span>
-            <small>.DK</small>
-          </h1>
-          <h2 className="hero-tagline">
-            Prison-filer. <span>Store muligheder.</span>
-          </h2>
+    <div className="container home-content">
+      <section className="shop-intro">
+        <div>
+          <span className="eyebrow">MCFILER · DANSKE MINECRAFT-FILER</span>
+          <h1>Det næste til din Prison-server.</h1>
           <p>
-            Skripts, Plugins og Setups med Prison i fokus.
-            <br className="desktop-break" /> Byg din næste Prison-server med
-            danske filer.
+            Skripts, Plugins og komplette Setups. Find dine filer, og tag
+            snakken med os på Discord.
           </p>
-          <div className="hero-actions">
-            <Link className="button button-primary" to="/produkter">
-              <Icon name="cube" size={20} />
-              Udforsk produkter
-              <Icon name="arrow" size={18} />
-            </Link>
-            <DiscordButton className="button button-secondary">
-              Besøg Discord
-            </DiscordButton>
-          </div>
-          <div className="hero-note">
-            <Icon name="chat" size={15} />
-            Bestilling og personlig kontakt via Discord
-          </div>
         </div>
-        <a
-          className="hero-scroll"
-          href="#kategorier"
-          aria-label="Se vores produktkategorier"
-        >
-          <span>DIT NÆSTE EVENTYR STARTER HER</span>
-          <Icon name="chevron" size={21} />
-        </a>
+        <Link className="button button-primary" to="/produkter">
+          Udforsk produkter
+          <Icon name="arrow" size={18} />
+        </Link>
       </section>
       <section
-        className="category-section container"
+        className="category-section"
         id="kategorier"
-        aria-label="Produktkategorier"
+        aria-labelledby="category-heading"
       >
+        <h2 id="category-heading">Kategorier</h2>
         <div className="category-strip">
           {categories.map((category, index) => (
             <Link
@@ -486,133 +424,41 @@ function Home() {
               className={`category-item category-${["script", "plugin", "setup"][index]}`}
               key={category.name}
             >
-              <div className="category-copy">
-                <span className="category-overline">
-                  {category.index} / BYG VIDERE
-                </span>
-                <h2>{category.name}</h2>
+              <Icon name={category.icon} size={30} />
+              <div>
+                <h3>{category.name}</h3>
                 <p>{category.description}</p>
-                <span className="category-link">
-                  Udforsk
-                  <Icon name="arrow" size={16} />
-                </span>
               </div>
-              <CategoryIllustration
-                type={(["script", "plugin", "setup"] as const)[index]}
-                className="category-illustration"
-              />
+              <Icon name="arrow" size={20} />
             </Link>
           ))}
         </div>
       </section>
-      <section className="section container" id="produkter">
+      <section className="section" id="produkter">
         <div className="section-heading">
           <div>
-            <span className="eyebrow">KLAR TIL DIN NÆSTE IDÉ?</span>
-            <h2>
-              Find dine <span>byggeklodser.</span>
-            </h2>
-            <p>
-              Små forbedringer eller en helt ny begyndelse. Her starter det.
-            </p>
+            <h2>Udforsk produkterne</h2>
+            <p>Et første kig på den kommende butik.</p>
           </div>
           <Link to="/produkter" className="text-link">
             Se alle produkter
-            <Icon name="arrow" size={18} />
+            <Icon name="arrow" size={17} />
           </Link>
         </div>
         <div className="catalogue-toolbar">
           <FilterButtons value={category} onChange={setCategory} />
-          <span className="catalogue-note">
-            <span className="notice-dot" />
-            Butikken er under opbygning
-          </span>
         </div>
         <ProductGrid selected={category} />
         <div className="demo-notice">
-          <Icon name="chat" size={15} />
+          <Icon name="chat" size={16} />
           <p>
-            Et kig ind i den kommende butik. Alle produkter, priser, funktioner
-            og versionsangivelser er midlertidige eksempler.
+            Butikken er under opbygning. Alle produkter, priser, funktioner og
+            versioner er midlertidige eksempler.
           </p>
         </div>
       </section>
-      <section className="how-section">
-        <div className="container">
-          <div className="how-intro">
-            <span className="eyebrow">FRA FØRSTE IDÉ TIL DIN SERVER</span>
-            <h2>
-              Tre skridt.
-              <br />
-              <span>Uendelige muligheder.</span>
-            </h2>
-            <p>
-              Vi holder det enkelt og samler samtalen på Discord, så du kan
-              fokusere på det, du vil bygge.
-            </p>
-            <Link className="text-link" to="/support">
-              Sådan foregår det
-              <Icon name="arrow" size={17} />
-            </Link>
-          </div>
-          <div className="steps">
-            {[
-              {
-                title: "Find din byggeklods",
-                text: "Udforsk produkterne, og find funktionerne, din server mangler.",
-                icon: "cube",
-              },
-              {
-                title: "Tag snakken med os",
-                text: "På Discord afklarer vi indhold, kompatibilitet og pris før bestilling.",
-                icon: "chat",
-              },
-              {
-                title: "Byg dit næste eventyr",
-                text: "Bestilling, betaling og aftale om levering foregår direkte på Discord.",
-                icon: "layers",
-              },
-            ].map((step, i) => (
-              <div className="step" key={step.title}>
-                <div className="step-top">
-                  <span>0{i + 1}</span>
-                  <div className="step-icon">
-                    <Icon name={step.icon as IconName} size={24} />
-                  </div>
-                </div>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="about-teaser container">
-        <div className="teaser-art">
-          <CategoryIllustration type="script" />
-        </div>
-        <div className="teaser-copy">
-          <span className="eyebrow">MINECRAFT ER BEDRE MED GODE IDÉER</span>
-          <h2>
-            Til dem, der altid
-            <br />
-            <span>bygger videre.</span>
-          </h2>
-          <p>
-            En ny funktion. Et nyt fællesskab. En helt ny verden. MCFiler er en
-            dansk butik med Prison-filer i centrum — til dig, der vil gøre mere
-            med din Minecraft-server.
-          </p>
-          <Link className="text-link" to="/om-os">
-            Lær MCFiler at kende
-            <Icon name="arrow" size={18} />
-          </Link>
-        </div>
-      </section>
-      <div className="container support-section">
-        <SupportBanner />
-      </div>
-    </>
+      <SupportBanner />
+    </div>
   );
 }
 
@@ -1078,20 +924,20 @@ export default function App() {
         Spring til indhold
       </a>
       <PageEffects />
-      <MotionEffects />
+
       <Header />
-      <PageTransition>
-        <main id="main-content" tabIndex={-1}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/produkter" element={<Products />} />
-            <Route path="/produkter/:slug" element={<ProductPage />} />
-            <Route path="/om-os" element={<About />} />
-            <Route path="/support" element={<Support />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-      </PageTransition>
+
+      <main id="main-content" tabIndex={-1}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/produkter" element={<Products />} />
+          <Route path="/produkter/:slug" element={<ProductPage />} />
+          <Route path="/om-os" element={<About />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+
       <Footer />
       {dialog && (
         <DiscordDialog

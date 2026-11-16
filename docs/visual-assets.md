@@ -1,3 +1,15 @@
+# Aktuelt butikslayout
+
+Opdateret 17. november 2026. Kompositionen er forenklet med inspiration fra brugerens MCSETUPS-skærmbillede og https://mcsetups.dk/: kompakt navigation, kort introduktion, kategorier og produktgitter. Ingen aktiver fra MCSETUPS er kopieret.
+
+Lys baggrund, hvidt indhold, mørk tekst og grøn accent giver produkterne plads. Kategorierne skelnes med afdæmpede farver og fælles ikoner. Kun almindelige hover-farveskift er bevaret; scene, figurer, parallax, partikler, scroll- og sideskiftanimationer er fjernet.
+
+Kun block-script, block-plugin og block-setup bruges som AI-genererede eksempelillustrationer. De øvrige billedfiler er bevaret som arkiv og indlæses ikke af siderne. Ingen nye billeder er genereret i denne revision.
+
+Nedenstående dokumenterer det tidligere billedsæt og dets oprindelige prompter. Beskrivelser af heroens placering og bevægelse gælder det tidligere design.
+
+---
+
 # Forenklet Minecraft-grafik og Prison-tema
 
 Aktuel grafik til MCFiler.dk, opdateret 26. oktober 2026 efter brugerens nærbillede af Mineplex-figuren. Billedsættet er lavet med den indbyggede ImageGen-funktion. Det er en AI-genereret stiltilnærmelse; en identisk menneskelig tegnestreg er ikke garanteret, og billederne beskrives ikke som manuelt tegnede.
