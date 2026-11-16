@@ -1,0 +1,175 @@
+.reading-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 3px;
+  background: #ffc747;
+  transform: scaleX(var(--reading-progress, 0));
+  transform-origin: left;
+  z-index: 100;
+  pointer-events: none;
+}
+.reveal-pending {
+  opacity: 0;
+  transform: translateY(22px);
+}
+.button,
+.filter,
+.category-item {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform 0.22s cubic-bezier(0.2, 0.75, 0.25, 1),
+    background 0.18s,
+    border-color 0.18s,
+    box-shadow 0.22s;
+}
+.click-wave {
+  position: absolute;
+  border-radius: 50%;
+  background: currentColor;
+  pointer-events: none;
+  z-index: 3;
+}
+.button:active,
+.filter:active {
+  transform: translateY(2px) scale(0.98);
+}
+.product-card {
+  transform: perspective(1000px) rotateX(var(--card-x, 0deg))
+    rotateY(var(--card-y, 0deg));
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.75, 0.25, 1),
+    box-shadow 0.25s,
+    border-color 0.2s;
+}
+.product-art img {
+  transition: transform 0.55s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+.text-link svg,
+.button > svg:last-child,
+.category-item > svg:last-child {
+  transition: transform 0.25s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+.desktop-nav > a {
+  transition:
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+}
+.mobile-nav {
+  transform-origin: top;
+  animation: menu-open 0.25s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+.menu-backdrop {
+  animation: soft-in 0.2s ease-out;
+}
+.discord-dialog[open] {
+  animation: dialog-open 0.3s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+.discord-dialog::backdrop {
+  animation: soft-in 0.25s ease-out;
+}
+.faq-list details[open] > p {
+  animation: answer-in 0.28s ease-out;
+}
+.faq-list summary > svg {
+  transition: rotate 0.2s;
+}
+.world-hero-copy {
+  animation: answer-in 0.6s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+.world-hero-art {
+  animation: art-in 0.8s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    transform: translateY(-2px);
+  }
+  .button:active {
+    transform: translateY(2px) scale(0.98);
+  }
+  .category-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px #142c4225;
+  }
+  .category-item:hover > svg:last-child,
+  .text-link:hover svg,
+  .button:hover > svg:last-child {
+    transform: translateX(3px);
+  }
+  .product-card:hover {
+    box-shadow: 0 9px 23px #264c5c20;
+    border-color: #7eb7c2;
+  }
+  .product-art-link:hover img {
+    transform: scale(1.045);
+  }
+}
+@keyframes menu-open {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scaleY(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes soft-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes dialog-open {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes answer-in {
+  from {
+    opacity: 0;
+    transform: translateY(9px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes art-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-pending {
+    opacity: 1;
+    transform: none;
+  }
+  .product-card {
+    transform: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .reading-progress {
+    display: none;
+  }
+}

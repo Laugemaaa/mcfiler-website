@@ -17,7 +17,11 @@ PNG-originalerne er bevaret i Codex' generated_images-mappe. WebP er eksporteret
 
 ## Bevægelse
 
-Ingen parallax, partikler, løbende animationer, 3D-vip eller animerede sideskift. Knapper har korte farveskift og synlig tastaturfokus. Reduceret bevægelse respekteres.
+Sektioner glider ind én gang ved scroll. En smal læseindikator følger sidens fremdrift. Knapper og kategorilinks har en kort klikbølge, produktkort har en diskret musestyret hældning på højst 1,5 grad, og billeder zoomer let ved hover. Filtrering, sideskift, mobilmenu, spørgsmål/svar og Discord-dialogen har korte overgange. Touch bruger klikrespons uden musestyret hældning.
+
+Der er ingen parallax, partikler eller løbende animationsloops. Scroll- og pointerarbejde samles med requestAnimationFrame; scroll-reveal bruger IntersectionObserver. Animationer og eventlyttere ryddes op. Reduceret bevægelse slår effekterne fra og viser straks alt indhold, også når indstillingen ændres under besøget. Tastaturfokus og navigation bevares.
+
+Produktionsbuild og browserkontroller dækker konkrete animationer, filtre, klikbølgens oprydning, mobilmenu, dialoger, sideskift og statisk/dynamisk reduceret bevægelse.
 
 ## Præcise billedprompter
 

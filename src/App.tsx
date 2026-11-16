@@ -24,6 +24,7 @@ import {
 } from "./data/products";
 import { Icon, type IconName } from "./components/Icon";
 import { ProductArt } from "./components/ProductArt";
+import { InteractionEffects } from "./components/InteractionEffects";
 
 const DiscordContext = createContext<(product?: string) => void>(() => {});
 
@@ -331,11 +332,38 @@ function ProductCard({ product }: { product: Product }) {
 }
 
 function ProductGrid({ selected = "Alle" }: { selected?: Category | "Alle" }) {
+  const grid = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const animations = Array.from(
+      grid.current?.querySelectorAll(".product-card") ?? [],
+    ).map((card, index) =>
+      card.animate(
+        [
+          { opacity: 0.3, transform: "translateY(12px) scale(.985)" },
+          { opacity: 1, transform: "translateY(0) scale(1)" },
+        ],
+        {
+          duration: 380,
+          delay: index * 45,
+          easing: "cubic-bezier(.2,.75,.25,1)",
+          fill: "backwards",
+        },
+      ),
+    );
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+    const cancel = () => animations.forEach((animation) => animation.cancel());
+    reduced.addEventListener("change", cancel);
+    return () => {
+      cancel();
+      reduced.removeEventListener("change", cancel);
+    };
+  }, [selected]);
   const filtered = products.filter(
     (product) => selected === "Alle" || product.category === selected,
   );
   return (
-    <div className="product-grid">
+    <div className="product-grid" ref={grid}>
       {filtered.map((product) => (
         <ProductCard key={product.slug} product={product} />
       ))}
@@ -1020,6 +1048,7 @@ export default function App() {
         Spring til indhold
       </a>
       <PageEffects />
+      <InteractionEffects />
 
       <Header />
 
