@@ -17,10 +17,10 @@ body {
 }
 .cloud-background-plane {
   position: absolute;
-  inset: 0 -70px;
+  inset: 0 -140px;
   background: url("/images/painted-sky-1672.webp") center top / 100% 1140px
     no-repeat;
-  animation: cloud-drift 48s ease-in-out infinite alternate;
+  animation: cloud-drift 24s ease-in-out -12s infinite alternate;
 }
 .cloud-background::after {
   content: "";
@@ -33,10 +33,10 @@ body {
 }
 @keyframes cloud-drift {
   from {
-    transform: translateX(-52px);
+    transform: translateX(-120px);
   }
   to {
-    transform: translateX(52px);
+    transform: translateX(120px);
   }
 }
 @media (max-width: 650px) {
